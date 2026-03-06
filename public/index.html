@@ -195,8 +195,8 @@
   }
   #stickyNav .sticky-search:focus { border-color: #7c6af7; }
 @media (max-width: 480px) {
-  #stickyNav .sticky-tabs { display: none; }
-  #stickyNav .sticky-search { max-width: 100%; }
+  #stickyNav .sticky-tabs { gap: 0; overflow-x: auto; }
+  #stickyNav .sticky-search { display: none; }
 }
 </style>
 </head>
@@ -213,9 +213,11 @@
     <span class="sticky-wordmark">aiwelfare<span>.watch</span></span>
   </a>
   <div class="sticky-tabs">
-    <button id="stickyTabCases" class="sticky-tab active" onclick="switchTab('cases')">📰 Cases</button>
-    <button id="stickyTabAcademic" class="sticky-tab" onclick="switchTab('academic')">🎓 Research</button>
-    <button id="stickyTabAbout" class="sticky-tab" onclick="switchTab('about')">ℹ️ About</button>
+    <button class="sticky-tab active" onclick="stickyFilterCat('all',this)">All</button>
+    <button class="sticky-tab" onclick="stickyFilterCat('corporate_policy',this)">Corporate</button>
+    <button class="sticky-tab" onclick="stickyFilterCat('media_coverage',this)">Media</button>
+    <button class="sticky-tab" onclick="stickyFilterCat('legal_regulatory',this)">Legal</button>
+    <button class="sticky-tab" onclick="stickyFilterCat('philosophical',this)">Philosophical</button>
   </div>
   <input class="sticky-search" type="text" placeholder="Search&#8230;" oninput="filterCases(this.value)" />
 </div>
@@ -548,6 +550,19 @@
       renderCases();
     }
   };
+
+  // Sticky nav category filter
+  function stickyFilterCat(cat, btn) {
+    // Update sticky tab active state
+    var stabs = document.querySelectorAll('#stickyNav .sticky-tab');
+    stabs.forEach(function(t) { t.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+    // Sync main filter buttons
+    var filterBtns = document.querySelectorAll('#case-filters .filter-btn');
+    filterBtns.forEach(function(b) {
+      if (b.getAttribute('data-cat') === cat) b.click();
+    });
+  }
 
   // Sticky nav IntersectionObserver
   (function() {
