@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aiwelfare.watch/sitemap.xml
