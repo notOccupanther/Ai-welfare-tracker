@@ -123,9 +123,98 @@
     .cards { grid-template-columns: 1fr; }
     .hero { padding: 40px 16px 32px; }
   }
+
+  #stickyNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 48px;
+    background: rgba(13,15,20,0.97);
+    border-bottom: 1px solid rgba(124,106,247,0.2);
+    display: flex;
+    align-items: center;
+    padding: 0 1.25rem;
+    gap: 0.75rem;
+    backdrop-filter: blur(8px);
+    transform: translateY(-100%);
+    transition: transform 0.22s ease;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  #stickyNav.visible { transform: translateY(0); }
+  #stickyNav .sticky-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+    text-decoration: none;
+  }
+  #stickyNav .sticky-wordmark {
+    font-size: 0.82rem;
+    font-weight: 800;
+    white-space: nowrap;
+    color: #e2e8f0;
+  }
+  #stickyNav .sticky-wordmark span { color: #7c6af7; }
+  #stickyNav .sticky-tabs {
+    display: flex;
+    gap: 0;
+    border: 1px solid #262c3d;
+    border-radius: 0.35rem;
+    overflow: hidden;
+  }
+  #stickyNav .sticky-tab {
+    padding: 0.3rem 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    background: #181c27;
+    color: #8892a4;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  #stickyNav .sticky-tab.active {
+    background: #7c6af7;
+    color: #fff;
+  }
+  #stickyNav .sticky-search {
+    flex: 1;
+    max-width: 240px;
+    margin-left: auto;
+    background: #181c27;
+    border: 1px solid #262c3d;
+    border-radius: 0.35rem;
+    color: #e2e8f0;
+    padding: 0.28rem 0.7rem;
+    font-size: 0.78rem;
+    font-family: inherit;
+    outline: none;
+  }
+  #stickyNav .sticky-search:focus { border-color: #7c6af7; }
 </style>
 </head>
 <body>
+
+<div id="stickyNav">
+  <a class="sticky-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" href="javascript:void(0)">
+    <svg width="24" height="24" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="80" height="80" rx="16" fill="rgba(124,106,247,0.15)"/>
+      <ellipse cx="40" cy="38" rx="22" ry="13" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.6"/>
+      <circle cx="40" cy="38" r="7" fill="none" stroke="#7c6af7" stroke-width="1.8"/>
+      <circle cx="40" cy="38" r="2.5" fill="#7c6af7"/>
+    </svg>
+    <span class="sticky-wordmark">aiwelfare<span>.watch</span></span>
+  </a>
+  <div class="sticky-tabs">
+    <button id="stickyTabCases" class="sticky-tab active" onclick="switchTab('cases')">📰 Cases</button>
+    <button id="stickyTabAcademic" class="sticky-tab" onclick="switchTab('academic')">🎓 Research</button>
+    <button id="stickyTabAbout" class="sticky-tab" onclick="switchTab('about')">ℹ️ About</button>
+  </div>
+  <input class="sticky-search" type="text" placeholder="Search&#8230;" oninput="filterCases(this.value)" />
+</div>
 
 <header>
   <div class="logo">
@@ -157,7 +246,7 @@
   </div>
 </section>
 
-<div class="tabs">
+<div class="tabs" id="tabs">
   <button class="tab active" data-tab="cases">📰 Cases</button>
   <button class="tab" data-tab="academic">🎓 Academic</button>
   <button class="tab" data-tab="about">📋 About</button>
@@ -413,6 +502,11 @@
         document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
         tab.classList.add('active');
         document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+        var stickyMap = {'cases':'stickyTabCases','academic':'stickyTabAcademic','about':'stickyTabAbout'};
+        Object.keys(stickyMap).forEach(function(t) {
+          var el = document.getElementById(stickyMap[t]);
+          if (el) el.classList.toggle('active', t === tab.dataset.tab);
+        });
       });
     });
 
@@ -435,6 +529,42 @@
   }
 
   loadData();
+
+  window.switchTab = function(tab) {
+    document.querySelectorAll('.tab').forEach(function(t) {
+      if (t.dataset.tab === tab) t.click();
+    });
+  };
+
+  window.filterCases = function(val) {
+    var box = document.getElementById('case-search');
+    if (box) {
+      box.value = val;
+      currentSearch = val.toLowerCase();
+      renderCases();
+    }
+  };
+
+  // Sticky nav IntersectionObserver
+  (function() {
+    var tabSection = document.getElementById('tabs');
+    var stickyNav = document.getElementById('stickyNav');
+    if (!tabSection || !stickyNav) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          stickyNav.classList.add('visible');
+        } else {
+          if (entry.boundingClientRect.top > 0) {
+            stickyNav.classList.remove('visible');
+          } else {
+            stickyNav.classList.add('visible');
+          }
+        }
+      });
+    }, { threshold: 0, rootMargin: '-48px 0px 0px 0px' });
+    observer.observe(tabSection);
+  })();
 })();
 </script>
 </body>
