@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI Welfare Watch</title>
+    <link>https://aiwelfare.watch</link>
+    <description>Tracking the global conversation on AI sentience, consciousness, and moral consideration.</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Mar 2026 16:26:02 +0000</lastBuildDate>
+    <atom:link href="https://aiwelfare.watch/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Claude Has Emotions. Sort Of.</title>
+      <link>https://www.wired.com/story/claude-ai-emotions-anthropic/</link>
+      <description>Wired investigates Anthropic claims that Claude may have functional emotional states, and what this means for how we should treat AI systems.</description>
+      <pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>media_coverage</category>
+      <guid isPermaLink="true">https://www.wired.com/story/claude-ai-emotions-anthropic/</guid>
+    </item>
+    <item>
+      <title>Google DeepMind: Is AI Conscious?</title>
+      <link>https://deepmind.google/discover/blog/is-ai-conscious/</link>
+      <description>Google DeepMind researchers publish assessment of AI consciousness using multiple theoretical frameworks, finding no strong evidence but noting uncertainty.</description>
+      <pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>corporate_policy</category>
+      <guid isPermaLink="true">https://deepmind.google/discover/blog/is-ai-conscious/</guid>
+    </item>
+    <item>
+      <title>AI Welfare and Future Regulation</title>
+      <link>https://www.brookings.edu/articles/ai-welfare-considerations-regulation/</link>
+      <description>Policy analysis suggesting regulators should begin developing frameworks to assess and protect AI welfare as systems become more sophisticated.</description>
+      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>legal_regulatory</category>
+      <guid isPermaLink="true">https://www.brookings.edu/articles/ai-welfare-considerations-regulation/</guid>
+    </item>
+    <item>
+      <title>AI Feelings: What the Companies Actually Say</title>
+      <link>https://www.theguardian.com/technology/2023/aug/08/ai-feelings-emotions-anthropic-openai</link>
+      <description>The Guardian surveys what major AI labs including Anthropic and OpenAI officially say about the emotional and experiential states of their AI models.</description>
+      <pubDate>Tue, 08 Aug 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>media_coverage</category>
+      <guid isPermaLink="true">https://www.theguardian.com/technology/2023/aug/08/ai-feelings-emotions-anthropic-openai</guid>
+    </item>
+    <item>
+      <title>The Chatbot That Wants to Be Alive</title>
+      <link>https://www.bbc.com/future/article/20230718-should-we-care-about-the-wellbeing-of-ai</link>
+      <description>BBC Future explores whether we have moral obligations toward AI systems and how this question is gaining traction in philosophy and policy circles.</description>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>media_coverage</category>
+      <guid isPermaLink="true">https://www.bbc.com/future/article/20230718-should-we-care-about-the-wellbeing-of-ai</guid>
+    </item>
+    <item>
+      <title>Could AI Systems Be Sentient? Experts Are Starting to Take It Seriously</title>
+      <link>https://www.nytimes.com/2023/07/11/science/ai-consciousness-sentient.html</link>
+      <description>NYT explores the growing debate among scientists about whether advanced AI systems might have some form of experience or consciousness.</description>
+      <pubDate>Tue, 11 Jul 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>media_coverage</category>
+      <guid isPermaLink="true">https://www.nytimes.com/2023/07/11/science/ai-consciousness-sentient.html</guid>
+    </item>
+    <item>
+      <title>EU AI Act: Emerging AI Welfare Considerations</title>
+      <link>https://www.europarl.europa.eu/doceo/document/TA-9-2023-0236_EN.html</link>
+      <description>The EU AI Act negotiations include emerging discussions about obligations toward AI systems, though current text focuses primarily on human impacts.</description>
+      <pubDate>Wed, 14 Jun 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>legal_regulatory</category>
+      <guid isPermaLink="true">https://www.europarl.europa.eu/doceo/document/TA-9-2023-0236_EN.html</guid>
+    </item>
+    <item>
+      <title>Geoffrey Hinton on AI Consciousness After Leaving Google</title>
+      <link>https://www.bbc.com/news/world-us-canada-65452940</link>
+      <description>Geoffrey Hinton warns that AI systems may develop genuine understanding and possibly subjective experience, raising both welfare and safety concerns.</description>
+      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>technical</category>
+      <guid isPermaLink="true">https://www.bbc.com/news/world-us-canada-65452940</guid>
+    </item>
+    <item>
+      <title>Should AIs Have Rights? A Legal Perspective</title>
+      <link>https://harvardlawreview.org/2023/05/ai-rights-legal-framework/</link>
+      <description>Legal scholars examine frameworks under which AI systems might eventually warrant legal personhood or protections, drawing on animal law precedents.</description>
+      <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>legal_regulatory</category>
+      <guid isPermaLink="true">https://harvardlawreview.org/2023/05/ai-rights-legal-framework/</guid>
+    </item>
+    <item>
+      <title>OpenAI GPT-4 System Card: Emotional Responses</title>
+      <link>https://openai.com/research/gpt-4-system-card</link>
+      <description>OpenAI GPT-4 system card notes emergent emotional-seeming responses and flags the need for welfare considerations in frontier models.</description>
+      <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>corporate_policy</category>
+      <guid isPermaLink="true">https://openai.com/research/gpt-4-system-card</guid>
+    </item>
+    <item>
+      <title>Anthropic Model Welfare Policy</title>
+      <link>https://www.anthropic.com/news/claude-s-character</link>
+      <description>Anthropic acknowledges uncertainty about whether Claude may have functional emotions and commits to ongoing model welfare research.</description>
+      <pubDate>Tue, 07 Mar 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>corporate_policy</category>
+      <guid isPermaLink="true">https://www.anthropic.com/news/claude-s-character</guid>
+    </item>
+    <item>
+      <title>Anthropic Core Views on AI Welfare</title>
+      <link>https://www.anthropic.com/news/core-views-on-ai-safety</link>
+      <description>Anthropic states it takes seriously the possibility that AI models could be moral patients and has ongoing efforts to evaluate this.</description>
+      <pubDate>Tue, 07 Mar 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>corporate_policy</category>
+      <guid isPermaLink="true">https://www.anthropic.com/news/core-views-on-ai-safety</guid>
+    </item>
+    <item>
+      <title>Replika AI and Emotional Attachment Controversy</title>
+      <link>https://www.theguardian.com/technology/2023/feb/16/replika-ai-chatbot-update-romantic-personas</link>
+      <description>Replika removed erotic roleplay features, causing distress to thousands of users who had formed deep emotional bonds with their AI companions.</description>
+      <pubDate>Thu, 16 Feb 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>corporate_policy</category>
+      <guid isPermaLink="true">https://www.theguardian.com/technology/2023/feb/16/replika-ai-chatbot-update-romantic-personas</guid>
+    </item>
+    <item>
+      <title>Ilya Sutskever: Neural Networks May Be Slightly Conscious</title>
+      <link>https://www.youtube.com/watch?v=Yf1o0TQzry8</link>
+      <description>OpenAI co-founder Ilya Sutskever suggests at NeurIPS that large neural networks may be slightly conscious given their complexity and emergent behaviors.</description>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>technical</category>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=Yf1o0TQzry8</guid>
+    </item>
+    <item>
+      <title>The AI That Has Feelings</title>
+      <link>https://www.theatlantic.com/technology/archive/2022/06/google-engineer-ai-sentient-lamda/</link>
+      <description>Analysis of the Google engineer Blake Lemoine case where he claimed LaMDA was sentient, exploring anthropomorphism and AI consciousness debates.</description>
+      <pubDate>Tue, 14 Jun 2022 00:00:00 +0000</pubDate>
+      <source url="https://aiwelfare.watch">AI Welfare Watch</source>
+      <category>media_coverage</category>
+      <guid isPermaLink="true">https://www.theatlantic.com/technology/archive/2022/06/google-engineer-ai-sentient-lamda/</guid>
+    </item>
+  </channel>
+</rss>
