@@ -566,22 +566,18 @@
 
   // Sticky nav IntersectionObserver
   (function() {
-    var tabSection = document.getElementById('cases-panel') || document.getElementById('tab-cases') || document.querySelector('.tab-content') || document.getElementById('tabs');
+    var tabSection = document.getElementById('case-filters');
     var stickyNav = document.getElementById('stickyNav');
     if (!tabSection || !stickyNav) return;
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
           stickyNav.classList.add('visible');
         } else {
-          if (entry.boundingClientRect.top > 0) {
-            stickyNav.classList.remove('visible');
-          } else {
-            stickyNav.classList.add('visible');
-          }
+          stickyNav.classList.remove('visible');
         }
       });
-    }, { threshold: 0, rootMargin: '-48px 0px 0px 0px' });
+    }, { threshold: 0 });
     observer.observe(tabSection);
   })();
 })();
