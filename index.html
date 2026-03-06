@@ -194,6 +194,10 @@
     outline: none;
   }
   #stickyNav .sticky-search:focus { border-color: #7c6af7; }
+@media (max-width: 480px) {
+  #stickyNav .sticky-tabs { display: none; }
+  #stickyNav .sticky-search { max-width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -547,7 +551,7 @@
 
   // Sticky nav IntersectionObserver
   (function() {
-    var tabSection = document.getElementById('tabs');
+    var tabSection = document.getElementById('cases-panel') || document.getElementById('tab-cases') || document.querySelector('.tab-content') || document.getElementById('tabs');
     var stickyNav = document.getElementById('stickyNav');
     if (!tabSection || !stickyNav) return;
     var observer = new IntersectionObserver(function(entries) {
