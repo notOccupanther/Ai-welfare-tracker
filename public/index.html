@@ -252,6 +252,7 @@
   </div>
 </section>
 
+<div id="tabSection"></div>
 <div class="tabs" id="tabs">
   <button class="tab active" data-tab="cases">📰 Cases</button>
   <button class="tab" data-tab="academic">🎓 Academic</button>
@@ -566,18 +567,23 @@
 
   // Sticky nav IntersectionObserver
   (function() {
-    var tabSection = document.getElementById('case-filters');
+    var tabSection = document.getElementById('tabSection');
     var stickyNav = document.getElementById('stickyNav');
     if (!tabSection || !stickyNav) return;
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-          stickyNav.classList.add('visible');
-        } else {
+        if (entry.isIntersecting) {
           stickyNav.classList.remove('visible');
+        } else {
+          var rect = tabSection.getBoundingClientRect();
+          if (rect.top < 0) {
+            stickyNav.classList.add('visible');
+          } else {
+            stickyNav.classList.remove('visible');
+          }
         }
       });
-    }, { threshold: 0 });
+    }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
     observer.observe(tabSection);
   })();
 })();
