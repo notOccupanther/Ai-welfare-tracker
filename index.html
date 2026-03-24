@@ -98,6 +98,12 @@
   .search-box { padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.85rem; width: 220px; outline: none; font-family: inherit; }
   .search-box:focus { border-color: var(--accent); }
   .search-box::placeholder { color: var(--muted); }
+  .sort-select { padding: 7px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.8rem; outline: none; font-family: inherit; cursor: pointer; }
+  .sort-select:focus { border-color: var(--accent); }
+  .results-count { font-size: 0.8rem; color: var(--muted); margin-left: auto; padding: 7px 0; }
+  .load-more-wrap { text-align: center; margin-top: 24px; }
+  .load-more-btn { padding: 10px 28px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .load-more-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   /* Cards */
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
@@ -386,6 +392,14 @@
 <div class="content">
 
   <div class="tab-panel active" id="tab-cases">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+      <span class="results-count" id="cases-count"></span>
+      <select class="sort-select" id="cases-sort" onchange="currentPage=1;renderCases()">
+        <option value="date-desc">Newest first</option>
+        <option value="date-asc">Oldest first</option>
+        <option value="severity">By severity</option>
+      </select>
+    </div>
     <div class="filters" id="case-filters">
       <input class="search-box" id="case-search" placeholder="Search cases…" type="search"/>
       <button class="filter-btn active" data-cat="all">All</button>
@@ -395,6 +409,9 @@
       <button class="filter-btn" data-cat="philosophical">Philosophical</button>
     </div>
     <div class="cards" id="cases-grid"></div>
+    <div class="load-more-wrap" id="load-more-wrap" style="display:none">
+      <button class="load-more-btn" id="load-more-btn" onclick="loadMore()">Load more</button>
+    </div>
   </div>
 
   <div class="tab-panel" id="tab-academic">
@@ -485,23 +502,53 @@
 
   var currentCatFilter = 'all';
   var currentSearch = '';
+  var currentPage = 1;
+  var PAGE_SIZE = 12;
 
-  function renderCases() {
+  function getSorted(arr) {
+    var sortEl = document.getElementById('cases-sort');
+    var sort = sortEl ? sortEl.value : 'date-desc';
+    var a = arr.slice();
+    if (sort === 'date-desc') a.sort(function(x,y){ return (y.date||'').localeCompare(x.date||''); });
+    else if (sort === 'date-asc') a.sort(function(x,y){ return (x.date||'').localeCompare(y.date||''); });
+    else if (sort === 'severity') {
+      var sev = {high:0,medium:1,low:2};
+      a.sort(function(x,y){ return (sev[x.severity]||2)-(sev[y.severity]||2); });
+    }
+    return a;
+  }
+
+  function loadMore() {
+    currentPage++;
+    renderCases(true);
+  }
+
+  function renderCases(append) {
     var grid = document.getElementById('cases-grid');
-    grid.innerHTML = '';
-    var filtered = CASES.filter(function(c) {
+    if (!append) grid.innerHTML = '';
+    var filtered = getSorted(CASES.filter(function(c) {
       var catOk = currentCatFilter === 'all' || c.category === currentCatFilter;
       var searchOk = !currentSearch || c.title.toLowerCase().indexOf(currentSearch) >= 0 || (c.summary && c.summary.toLowerCase().indexOf(currentSearch) >= 0);
       return catOk && searchOk;
-    });
+    }));
+    var countEl = document.getElementById('cases-count');
+    if (countEl) countEl.textContent = filtered.length + ' entr' + (filtered.length === 1 ? 'y' : 'ies');
+    var wrap = document.getElementById('load-more-wrap');
+    var btn = document.getElementById('load-more-btn');
+    var page = filtered.slice(0, currentPage * PAGE_SIZE);
+    var remaining = filtered.length - page.length;
+    if (wrap) wrap.style.display = remaining > 0 ? 'block' : 'none';
+    if (btn) btn.textContent = 'Load more (' + remaining + ' remaining)';
     if (filtered.length === 0) {
+      grid.innerHTML = '';
       var empty = document.createElement('div');
       empty.className = 'empty';
-      empty.textContent = 'No cases match your filters.';
+      empty.textContent = 'No entries match your filters.';
       grid.appendChild(empty);
       return;
     }
-    filtered.forEach(function(c) {
+    var toRender = append ? filtered.slice((currentPage-1)*PAGE_SIZE, currentPage*PAGE_SIZE) : page;
+    toRender.forEach(function(c) {
       var card = document.createElement('div');
       card.className = 'card';
       var meta = document.createElement('div');
@@ -654,6 +701,7 @@
 
     // Search
     document.getElementById('case-search').addEventListener('input', function(e) {
+        currentPage = 1;
       currentSearch = e.target.value.toLowerCase();
       renderCases();
     });
