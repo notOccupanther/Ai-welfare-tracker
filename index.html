@@ -106,9 +106,29 @@
   .load-more-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   /* Cards */
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s, transform 0.2s; }
-  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  /* Grouped banner layout */
+  .category-group { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .category-group-header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; cursor: pointer; user-select: none; transition: background 0.15s; }
+  .category-group-header:hover { background: var(--surface2); }
+  .group-chevron { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+  .group-chevron.open { transform: rotate(180deg); }
+  .category-group-body { padding: 0 0.75rem 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .entry-row { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; padding: 0.7rem 1rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .entry-row:hover { border-color: var(--accent); background: rgba(99,102,241,0.05); }
+  .entry-row.severity-high { border-left-color: #ef4444; }
+  .entry-row.severity-medium { border-left-color: #f59e0b; }
+  .entry-row.severity-low { border-left-color: #22c55e; }
+  .entry-row.expanded { background: rgba(99,102,241,0.06); border-color: var(--accent); }
+  .entry-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+  .entry-title { font-size: 0.88rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .entry-source { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+  .entry-body { display: none; margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .entry-body a { color: var(--accent2); text-decoration: none; }
+  .entry-body a:hover { text-decoration: underline; }
+  .entry-row.expanded .entry-body { display: block; }
+  .expand-chevron { float: right; color: var(--muted); font-size: 0.75rem; transition: transform 0.2s; margin-left: 8px; }
+  .entry-row.expanded .expand-chevron { transform: rotate(180deg); }
+  /* Keep card refs for results count etc */
   .card-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
   .badge { padding: 3px 9px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
   .badge-corporate_policy { background: #1e2040; color: #a89cf8; }
@@ -408,10 +428,7 @@
       <button class="filter-btn" data-cat="legal_regulatory">Legal</button>
       <button class="filter-btn" data-cat="philosophical">Philosophical</button>
     </div>
-    <div class="cards" id="cases-grid"></div>
-    <div class="load-more-wrap" id="load-more-wrap" style="display:none">
-      <button class="load-more-btn" id="load-more-btn" onclick="loadMore()">Load more</button>
-    </div>
+    <div id="cases-grid"></div>
   </div>
 
   <div class="tab-panel" id="tab-academic">
@@ -502,89 +519,119 @@
 
   var currentCatFilter = 'all';
   var currentSearch = '';
-  var currentPage = 1;
-  var PAGE_SIZE = 12;
+  var expandedEntryId = null;
 
-  function getSorted(arr) {
-    var sortEl = document.getElementById('cases-sort');
-    var sort = sortEl ? sortEl.value : 'date-desc';
-    var a = arr.slice();
-    if (sort === 'date-desc') a.sort(function(x,y){ return (y.date||'').localeCompare(x.date||''); });
-    else if (sort === 'date-asc') a.sort(function(x,y){ return (x.date||'').localeCompare(y.date||''); });
-    else if (sort === 'severity') {
-      var sev = {high:0,medium:1,low:2};
-      a.sort(function(x,y){ return (sev[x.severity]||2)-(sev[y.severity]||2); });
+  var CAT_ORDER = ['corporate_policy','media_coverage','legal_regulatory','philosophical','technical'];
+  var CAT_LABELS = {
+    corporate_policy: 'Corporate Policy',
+    media_coverage: 'Media Coverage',
+    legal_regulatory: 'Legal & Regulatory',
+    philosophical: 'Philosophical',
+    technical: 'Technical Research'
+  };
+  var CAT_EMOJI = {
+    corporate_policy: '🏢',
+    media_coverage: '📰',
+    legal_regulatory: '⚖️',
+    philosophical: '🧠',
+    technical: '🔬'
+  };
+  var SEV_COLORS = { high: '#ef4444', medium: '#f59e0b', low: '#22c55e' };
+
+  function toggleGroup(gid) {
+    var group = document.getElementById(gid);
+    var body = group.querySelector('.category-group-body');
+    var chevron = group.querySelector('.group-chevron');
+    var open = body.style.display !== 'none';
+    body.style.display = open ? 'none' : 'flex';
+    chevron.classList.toggle('open', !open);
+  }
+
+  function toggleEntry(id) {
+    var el = document.getElementById('entry-' + id);
+    if (!el) return;
+    var isOpen = el.classList.contains('expanded');
+    if (expandedEntryId !== null) {
+      var prev = document.getElementById('entry-' + expandedEntryId);
+      if (prev) prev.classList.remove('expanded');
     }
-    return a;
+    if (!isOpen) {
+      el.classList.add('expanded');
+      expandedEntryId = id;
+    } else {
+      expandedEntryId = null;
+    }
   }
 
-  function loadMore() {
-    currentPage++;
-    renderCases(true);
+  function renderEntryRow(c) {
+    var sev = c.severity || 'medium';
+    var cat = c.category || 'media_coverage';
+    var badge = '<span class="badge badge-' + cat + '">' + (CAT_EMOJI[cat]||'') + ' ' + (CAT_LABELS[cat]||cat) + '</span>';
+    var sevBadge = '<span class="badge" style="background:rgba(99,102,241,0.08);color:' + (SEV_COLORS[sev]||'#888') + ';border-color:rgba(99,102,241,0.15)">● ' + sev + '</span>';
+    var link = c.url ? '<a href="' + c.url + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">Read →</a>' : '';
+    return '<div class="entry-row severity-' + sev + '" id="entry-' + c.id + '" onclick="toggleEntry(' + c.id + ')">' +
+      '<span class="expand-chevron">▼</span>' +
+      '<div class="entry-meta">' +
+        '<span style="font-size:0.72rem;color:var(--muted)">📅 ' + (c.date||'') + '</span>' +
+        sevBadge +
+      '</div>' +
+      '<div class="entry-title">' + (c.title||'') + '</div>' +
+      '<div class="entry-source">■ ' + (c.source||'') + '</div>' +
+      '<div class="entry-body">' + (c.summary||'No summary available.') + (link ? ' &nbsp;' + link : '') + '</div>' +
+    '</div>';
   }
 
-  function renderCases(append) {
+  function renderCases() {
     var grid = document.getElementById('cases-grid');
-    if (!append) grid.innerHTML = '';
-    var filtered = getSorted(CASES.filter(function(c) {
+    var filtered = CASES.filter(function(c) {
       var catOk = currentCatFilter === 'all' || c.category === currentCatFilter;
       var searchOk = !currentSearch || c.title.toLowerCase().indexOf(currentSearch) >= 0 || (c.summary && c.summary.toLowerCase().indexOf(currentSearch) >= 0);
       return catOk && searchOk;
-    }));
+    });
+    // Sort newest first within each group
+    filtered.sort(function(a,b) { return (b.date||'').localeCompare(a.date||''); });
     var countEl = document.getElementById('cases-count');
     if (countEl) countEl.textContent = filtered.length + ' entr' + (filtered.length === 1 ? 'y' : 'ies');
-    var wrap = document.getElementById('load-more-wrap');
-    var btn = document.getElementById('load-more-btn');
-    var page = filtered.slice(0, currentPage * PAGE_SIZE);
-    var remaining = filtered.length - page.length;
-    if (wrap) wrap.style.display = remaining > 0 ? 'block' : 'none';
-    if (btn) btn.textContent = 'Load more (' + remaining + ' remaining)';
     if (filtered.length === 0) {
-      grid.innerHTML = '';
-      var empty = document.createElement('div');
-      empty.className = 'empty';
-      empty.textContent = 'No entries match your filters.';
-      grid.appendChild(empty);
+      grid.innerHTML = '<div class="empty">No entries match your filters.</div>';
       return;
     }
-    var toRender = append ? filtered.slice((currentPage-1)*PAGE_SIZE, currentPage*PAGE_SIZE) : page;
-    toRender.forEach(function(c) {
-      var card = document.createElement('div');
-      card.className = 'card';
-      var meta = document.createElement('div');
-      meta.className = 'card-meta';
-      meta.appendChild(makeBadge(c.category));
-      meta.appendChild(makeSev(c.severity));
-      var dateEl = document.createElement('span');
-      dateEl.className = 'card-date';
-      dateEl.textContent = c.date || '';
-      meta.appendChild(dateEl);
-      card.appendChild(meta);
-      var h3 = document.createElement('h3');
-      h3.textContent = c.title;
-      card.appendChild(h3);
-      var p = document.createElement('p');
-      p.textContent = c.summary || '';
-      card.appendChild(p);
-      var footer = document.createElement('div');
-      footer.className = 'card-footer';
-      var src = document.createElement('span');
-      src.className = 'card-source';
-      src.textContent = c.source || '';
-      footer.appendChild(src);
-      if (c.url) {
-        var link = document.createElement('a');
-        link.href = c.url;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.className = 'card-link';
-        link.textContent = 'Read →';
-        footer.appendChild(link);
-      }
-      card.appendChild(footer);
-      grid.appendChild(card);
+    var isFiltered = currentCatFilter !== 'all' || currentSearch;
+    if (isFiltered) {
+      // Flat list when searching/filtering
+      grid.innerHTML = filtered.map(renderEntryRow).join('');
+      return;
+    }
+    // Grouped view
+    var grouped = {};
+    filtered.forEach(function(c) {
+      var k = c.category || 'media_coverage';
+      if (!grouped[k]) grouped[k] = [];
+      grouped[k].push(c);
     });
+    var cats = CAT_ORDER.filter(function(k) { return grouped[k]; });
+    grid.innerHTML = cats.map(function(k, i) {
+      var items = grouped[k];
+      var gid = 'wg_' + k;
+      var highCount = items.filter(function(c){ return c.severity === 'high'; }).length;
+      var isOpen = i === 0;
+      return '<div class="category-group" id="' + gid + '">' +
+        '<div class="category-group-header" onclick="toggleGroup('' + gid + '')">' +
+          '<div style="display:flex;align-items:center;gap:0.65rem">' +
+            '<span style="font-size:1.05rem">' + (CAT_EMOJI[k]||'') + '</span>' +
+            '<span style="font-weight:700;color:var(--text);font-size:0.92rem">' + (CAT_LABELS[k]||k) + '</span>' +
+            '<span style="background:var(--surface2);border:1px solid var(--border);border-radius:1rem;padding:0.12rem 0.55rem;font-size:0.72rem;color:var(--muted)">' + items.length + '</span>' +
+            (highCount ? '<span style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:1rem;padding:0.12rem 0.55rem;font-size:0.72rem;color:#ef4444">🔴 ' + highCount + ' high</span>' : '') +
+          '</div>' +
+          '<span class="group-chevron ' + (isOpen ? 'open' : '') + '">▼</span>' +
+        '</div>' +
+        '<div class="category-group-body" style="display:' + (isOpen ? 'flex' : 'none') + '">' +
+          items.map(renderEntryRow).join('') +
+        '</div>' +
+      '</div>';
+    }).join('');
   }
+
 
   function renderAcademic() {
     var list = document.getElementById('academic-list');
