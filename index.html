@@ -34,20 +34,60 @@
   a { color: var(--accent2); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* Header */
-  header { border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; gap: 16px; }
-  .logo { display: flex; align-items: center; gap: 12px; }
-  .logo-text { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
-  .logo-sub { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
-  nav { margin-left: auto; display: flex; gap: 8px; }
+  /* Header / Hero */
+  header {
+    background: linear-gradient(135deg, #0e1018 0%, #13161f 50%, #180f38 100%);
+    border-bottom: 1px solid rgba(124,106,247,0.2);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 80%, rgba(124,106,247,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-brand { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin-bottom: 2rem; }
+  .hero-headline {
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1.25rem;
+  }
+  .hero-headline em { font-style: normal; color: #a89cf8; }
+  .hero-purpose {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+  }
+  .hero-stats { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .hero-stat { text-align: center; }
+  .hero-stat-value { font-size: 2.2rem; font-weight: 900; color: #a89cf8; letter-spacing: -0.04em; line-height: 1; }
+  .hero-stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+  .hero-cta {
+    display: inline-block;
+    background: none;
+    border: 1px solid rgba(124,106,247,0.4);
+    color: #a89cf8;
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .hero-cta:hover { border-color: #7c6af7; background: rgba(124,106,247,0.1); color: #fff; }
 
-  /* Hero */
-  .hero { padding: 64px 24px 48px; max-width: 1000px; margin: 0 auto; text-align: center; }
-  .hero h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 16px; }
-  .hero h1 span { color: var(--accent2); }
-  .hero p { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
-
-  /* Stats */
+  /* Stats (legacy, keep for compat) */
   .stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 48px; }
 
   /* Charts */
@@ -286,35 +326,59 @@
   <input class="sticky-search" type="text" placeholder="Search&#8230;" oninput="filterCases(this.value)" />
 </div>
 
-<header>
-  <div class="logo">
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="10" fill="#13161f"/>
-      <ellipse cx="20" cy="20" rx="12" ry="7" stroke="#7c6af7" stroke-width="1.5"/>
-      <circle cx="20" cy="20" r="4" fill="#7c6af7"/>
-      <circle cx="20" cy="20" r="2" fill="#0e1018"/>
-      <path d="M8 20 Q14 12 20 20 Q26 28 32 20" stroke="#a89cf8" stroke-width="0.8" fill="none" opacity="0.4"/>
-      <text x="10" y="36" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="#7c6af7">AIWW</text>
-    </svg>
-    <div>
-      <div class="logo-text">AI Welfare Watch</div>
-      <div class="logo-sub">Public Interest Monitoring</div>
+<header id="siteHero">
+  <div class="header-inner">
+    <div class="header-brand">
+      <svg width="52" height="52" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="80" height="80" rx="16" fill="rgba(124,106,247,0.12)"/>
+        <rect width="80" height="80" rx="16" fill="none" stroke="#7c6af7" stroke-width="1.5" stroke-opacity="0.4"/>
+        <ellipse cx="40" cy="38" rx="22" ry="13" fill="none" stroke="#a89cf8" stroke-width="1.2" stroke-opacity="0.6"/>
+        <circle cx="40" cy="38" r="7" fill="none" stroke="#7c6af7" stroke-width="1.5"/>
+        <circle cx="40" cy="38" r="2.5" fill="#7c6af7"/>
+        <circle cx="44" cy="35" r="1" fill="#a89cf8" opacity="0.7"/>
+        <circle cx="36" cy="35" r="1" fill="#a89cf8" opacity="0.7"/>
+        <circle cx="44" cy="41" r="1" fill="#a89cf8" opacity="0.7"/>
+        <circle cx="36" cy="41" r="1" fill="#a89cf8" opacity="0.7"/>
+        <line x1="40" y1="38" x2="44" y2="35" stroke="#7c6af7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="40" y1="38" x2="36" y2="35" stroke="#7c6af7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="40" y1="38" x2="44" y2="41" stroke="#7c6af7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="40" y1="38" x2="36" y2="41" stroke="#7c6af7" stroke-width="0.8" opacity="0.5"/>
+        <text x="40" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="13" fill="#a89cf8" letter-spacing="-0.5">AIWW</text>
+      </svg>
+      <h1 style="font-size:1.45rem;font-weight:800;letter-spacing:-0.03em;line-height:1;margin:0">
+        <span style="color:var(--text)">aiwelfare</span><span style="color:#7c6af7">.watch</span>
+        <span class="live-badge" style="margin-left:0.5rem">LIVE</span>
+      </h1>
     </div>
-  </div>
-  <nav>
-    <a href="/feed.xml" style="font-size:0.82rem;color:var(--muted);">RSS</a>
-  </nav>
-</header>
 
-<section class="hero">
-  <h1>Tracking the conversation around<br/><span>AI welfare, sentience, and consciousness.</span></h1>
-  <p>Independent monitoring of how the world is grappling with one of the most urgent ethical questions of our time.</p>
-  <div class="stats">
-    <div class="stat"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total Cases</div></div>
-    <div class="stat"><div class="stat-num" id="stat-cats">0</div><div class="stat-label">Categories</div></div>
-    <div class="stat"><div class="stat-num" id="stat-sources">0</div><div class="stat-label">Sources</div></div>
+    <div class="hero-headline">
+      The <em>moral status of AI</em><br>is being watched here.
+    </div>
+
+    <p class="hero-purpose">
+      Independent tracking of what companies, researchers, regulators, and philosophers<br>
+      are saying about AI sentience, consciousness, and welfare.<br>
+      <strong style="color:rgba(255,255,255,0.7)">Public interest. Open data.</strong>
+    </p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="stat-total">—</div>
+        <div class="hero-stat-label">Entries Tracked</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="stat-cats">5</div>
+        <div class="hero-stat-label">Categories</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="stat-updated">Weekly</div>
+        <div class="hero-stat-label">Updated</div>
+      </div>
+    </div>
+
+    <a class="hero-cta" onclick="document.getElementById('tabs').scrollIntoView({behavior:'smooth'})" href="javascript:void(0)">Explore the entries ↓</a>
   </div>
-</section>
+</header>
 
 <!-- INTRO SECTION -->
 <div style="max-width:1000px;margin:0 auto 24px;padding:0 24px">
@@ -760,8 +824,6 @@
     var total = CASES.length + ACADEMIC.length;
     setTimeout(function() {
       countUp(document.getElementById('stat-total'), total, 1200);
-      countUp(document.getElementById('stat-cats'), cats.size, 800);
-      countUp(document.getElementById('stat-sources'), sources.size, 1000);
     }, 300);
     renderCases();
     renderAcademic();
