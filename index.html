@@ -616,7 +616,7 @@
       var highCount = items.filter(function(c){ return c.severity === 'high'; }).length;
       var isOpen = i === 0;
       return '<div class="category-group" id="' + gid + '">' +
-        '<div class="category-group-header" onclick="toggleGroup('' + gid + '')">' +
+        '<div class="category-group-header" onclick="toggleGroup(&quot;' + gid + '&quot;)">' +
           '<div style="display:flex;align-items:center;gap:0.65rem">' +
             '<span style="font-size:1.05rem">' + (CAT_EMOJI[k]||'') + '</span>' +
             '<span style="font-weight:700;color:var(--text);font-size:0.92rem">' + (CAT_LABELS[k]||k) + '</span>' +
