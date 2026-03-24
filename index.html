@@ -120,6 +120,40 @@
   .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 
   /* Tabs */
+  /* LIVE badge */
+  .live-badge {
+    background: #ef4444;
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+    animation: livepulse 2s infinite;
+    vertical-align: middle;
+  }
+  @keyframes livepulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+  /* Stats bar */
+  .stats-bar { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .stats-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+  .sbar-stat { background: var(--surface); padding: 1rem 1.25rem; text-align: center; transition: background 0.15s; }
+  .sbar-stat:hover { background: var(--surface2); }
+  .sbar-value { font-size: 1.7rem; font-weight: 800; color: var(--accent2); line-height: 1; letter-spacing: -0.02em; }
+  .sbar-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 0.2rem; }
+  .sbar-corp .sbar-value { color: #7c6af7; }
+  .sbar-media .sbar-value { color: #3b82f6; }
+  .sbar-legal .sbar-value { color: #f59e0b; }
+  .sbar-phil .sbar-value { color: #10b981; }
+  .sbar-tech .sbar-value { color: #a78bfa; }
+
   /* Commentary section */
   .commentary-section { max-width: 1000px; margin: 0 auto 0; padding: 0 24px 32px; }
   .commentary-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; }
@@ -463,6 +497,18 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner" id="statsBar">
+    <div class="sbar-stat"><div class="sbar-value" id="sbar-total">—</div><div class="sbar-label">Total Entries</div></div>
+    <div class="sbar-stat sbar-corp"><div class="sbar-value" id="sbar-corp">—</div><div class="sbar-label">Corporate Policy</div></div>
+    <div class="sbar-stat sbar-media"><div class="sbar-value" id="sbar-media">—</div><div class="sbar-label">Media Coverage</div></div>
+    <div class="sbar-stat sbar-legal"><div class="sbar-value" id="sbar-legal">—</div><div class="sbar-label">Legal / Regulatory</div></div>
+    <div class="sbar-stat sbar-phil"><div class="sbar-value" id="sbar-phil">—</div><div class="sbar-label">Philosophical</div></div>
+    <div class="sbar-stat sbar-tech"><div class="sbar-value" id="sbar-tech">—</div><div class="sbar-label">Technical</div></div>
   </div>
 </div>
 
@@ -822,9 +868,30 @@
     var cats = new Set(CASES.map(function(c) { return c.category; }));
     var sources = new Set(CASES.map(function(c) { return c.source; }));
     var total = CASES.length + ACADEMIC.length;
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var dateStr = now.getDate() + ' ' + months[now.getMonth()];
+    var updatedEl = document.getElementById('stat-updated');
+    if (updatedEl) updatedEl.textContent = dateStr;
     setTimeout(function() {
       countUp(document.getElementById('stat-total'), total, 1200);
     }, 300);
+    // Populate stats bar
+    var bycat = {};
+    CASES.forEach(function(c){ bycat[c.category] = (bycat[c.category]||0)+1; });
+    var sbarTotal = document.getElementById('sbar-total');
+    if (sbarTotal) sbarTotal.textContent = CASES.length + ACADEMIC.length;
+    var sbarCorp = document.getElementById('sbar-corp');
+    if (sbarCorp) sbarCorp.textContent = bycat['corporate_policy']||0;
+    var sbarMedia = document.getElementById('sbar-media');
+    if (sbarMedia) sbarMedia.textContent = bycat['media_coverage']||0;
+    var sbarLegal = document.getElementById('sbar-legal');
+    if (sbarLegal) sbarLegal.textContent = bycat['legal_regulatory']||0;
+    var sbarPhil = document.getElementById('sbar-phil');
+    if (sbarPhil) sbarPhil.textContent = bycat['philosophical']||0;
+    var sbarTech = document.getElementById('sbar-tech');
+    if (sbarTech) sbarTech.textContent = bycat['technical']||0;
+
     renderCases();
     renderAcademic();
     renderCharts();
