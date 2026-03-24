@@ -42,7 +42,7 @@
   nav { margin-left: auto; display: flex; gap: 8px; }
 
   /* Hero */
-  .hero { padding: 64px 24px 48px; max-width: 900px; margin: 0 auto; text-align: center; }
+  .hero { padding: 64px 24px 48px; max-width: 1000px; margin: 0 auto; text-align: center; }
   .hero h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 16px; }
   .hero h1 span { color: var(--accent2); }
   .hero p { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
@@ -52,8 +52,8 @@
 
   /* Charts */
   .charts-section {
-    max-width: 900px;
-    margin: 0 auto 48px;
+    max-width: 1000px;
+    margin: 0 auto 40px;
     padding: 0 24px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -80,13 +80,24 @@
   .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 
   /* Tabs */
-  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding: 0 24px; max-width: 1200px; margin: 0 auto; }
+  /* Commentary section */
+  .commentary-section { max-width: 1000px; margin: 0 auto 0; padding: 0 24px 32px; }
+  .commentary-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; }
+  .commentary-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+  .commentary-body { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+  .commentary-body p { margin-bottom: 0.85rem; }
+  .commentary-body p:last-child { margin-bottom: 0; }
+  .commentary-spotlight { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
+  .commentary-spotlight-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .commentary-spotlight-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .commentary-spotlight-text { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding: 0 24px; max-width: 1000px; margin: 0 auto; }
   .tab { padding: 12px 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
   .tab:hover { color: var(--text); }
   .tab.active { color: var(--accent2); border-bottom-color: var(--accent); }
 
   /* Content */
-  .content { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .content { max-width: 1000px; margin: 0 auto; padding: 32px 24px; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
@@ -392,6 +403,7 @@
 </div>
 
 <!-- CROSS-PROMO: AI Psychosis Watch -->
+<div style="max-width:1000px;margin:0 auto;padding:0 24px 32px;">
 <div style="background:linear-gradient(90deg,#1a0d2e 0%,#21133a 100%);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
   <span style="font-size:1.3rem;">🧠</span>
   <div style="flex:1;min-width:200px;">
@@ -399,6 +411,7 @@
     <div style="font-size:0.9rem;color:#e8e8ed;line-height:1.4;">The other side of the question — <strong style="color:#fff;">AI Psychosis Watch</strong> documents reported cases of AI-induced psychological harm in humans.</div>
   </div>
   <a href="https://aipsychosis.watch" target="_blank" rel="noopener" style="background:#2d1a1a;border:1px solid rgba(239,68,68,0.4);color:#f87171;text-decoration:none;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:600;letter-spacing:0.05em;white-space:nowrap;" onmouseover="this.style.background='#3d2020'" onmouseout="this.style.background='#2d1a1a'">Visit aipsychosis.watch →</a>
+</div>
 </div>
 
 <div class="charts-section">
@@ -413,6 +426,23 @@
 </div>
 
 <div id="tabSection"></div>
+<!-- COMMENTARY SECTION -->
+<div class="commentary-section" id="commentary-section">
+  <div class="commentary-card" id="commentaryCard">
+    <div class="commentary-label">📝 Weekly Observation</div>
+    <div class="commentary-body" id="commentaryBody">
+      <p>The dominant pattern across this tracker's 26 entries is institutional hedging. Corporate policy entries — from Anthropic, OpenAI, Google DeepMind — all acknowledge uncertainty about AI moral status without committing to any concrete protective measures. The language is careful: "functional emotions," "potential moral patienthood," "ongoing research." The acknowledgement is real; the action is deferred.</p>
+      <p>What's notable is the convergence in timing. The majority of academic and media coverage clusters between 2022 and 2023 — a period when frontier model capabilities made the question feel less theoretical. David Chalmers, Geoffrey Hinton, Ilya Sutskever, and the APA consciousness research team all published in that window. Whether this reflects genuine intellectual momentum or a media cycle remains an open question.</p>
+      <p>The legal and regulatory category remains thin. Three entries — Yale Law Journal, Brookings, the EU AI Act — all frame the question as speculative and future-facing. No jurisdiction has yet proposed enforceable AI welfare standards. The gap between the philosophical literature and the regulatory apparatus is substantial.</p>
+    </div>
+    <div class="commentary-spotlight" id="commentarySpotlight">
+      <div class="commentary-spotlight-label">🔍 Entry in Focus</div>
+      <div class="commentary-spotlight-title">Consciousness in Artificial Intelligence (Butlin, Long et al., arXiv 2023)</div>
+      <div class="commentary-spotlight-text">The most methodologically rigorous entry in the tracker. A multidisciplinary team applied Global Workspace Theory, Integrated Information Theory, and four other leading frameworks to current AI systems — finding no conclusive evidence of consciousness but substantial theoretical uncertainty. The paper's significance is procedural: it demonstrates that the question can be approached empirically rather than philosophically. That shifts the conversation considerably.</div>
+    </div>
+  </div>
+</div>
+
 <div class="tabs" id="tabs">
   <button class="tab active" data-tab="cases">📰 Cases</button>
   <button class="tab" data-tab="academic">🎓 Academic</button>
