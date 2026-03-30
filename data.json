@@ -2,11 +2,11 @@
   "cases": [
     {
       "id": 11,
-      "title": "Could AI Systems Be Sentient? Experts Are Starting to Take It Seriously",
-      "url": "https://www.nytimes.com/2023/07/11/science/ai-consciousness-sentient.html",
-      "date": "2023-07-11",
+      "title": "How to Tell if Your A.I. Is Conscious",
+      "url": "https://www.nytimes.com/2023/09/18/science/ai-computers-consciousness.html",
+      "date": "2023-09-18",
       "source": "New York Times",
-      "summary": "NYT explores the growing debate among scientists about whether advanced AI systems might have some form of experience or consciousness.",
+      "summary": "NYT explores the science of consciousness applied to AI systems, examining what measurable qualities might indicate the presence of AI experience, covering the Butlin/Long framework.",
       "category": "media_coverage",
       "severity": "high",
       "raw_snippet": null,
@@ -50,23 +50,6 @@
       "doi": null,
       "venue": null,
       "abstract": null
-    },
-    {
-      "id": 26,
-      "title": "Measuring Emotion-Like States in Language Models",
-      "url": "https://arxiv.org/abs/2304.09582",
-      "date": "2023-04-19",
-      "source": "arXiv",
-      "summary": "Technical paper developing methods to detect and measure emotion-like internal states in large language models using activation analysis.",
-      "category": "technical",
-      "severity": "medium",
-      "raw_snippet": null,
-      "scraped_at": null,
-      "source_type": "academic",
-      "authors": "Amanda Askell et al.",
-      "doi": null,
-      "venue": "arXiv preprint",
-      "abstract": "Proposes evaluation frameworks for functional emotional states in AI systems."
     },
     {
       "id": 3,
@@ -156,10 +139,10 @@
     {
       "id": 16,
       "title": "Could a Large Language Model be Conscious?",
-      "url": "https://arxiv.org/abs/2209.11430",
+      "url": "https://arxiv.org/abs/2303.07103",
       "date": "2022-09-23",
       "source": "arXiv",
-      "summary": "David Chalmers explores whether LLMs could conceivably be conscious, examining functionalist and philosophical frameworks for AI experience.",
+      "summary": "David Chalmers explores whether LLMs could conceivably be conscious, examining functionalist and philosophical frameworks for AI experience, presented at NeurIPS 2022.",
       "category": "philosophical",
       "severity": "high",
       "raw_snippet": null,
@@ -243,7 +226,7 @@
     {
       "id": 10,
       "title": "The Moral Status of Artificial Intelligences",
-      "url": "https://philpapers.org/rec/SCHADO-9",
+      "url": "https://philpapers.org/rec/LONMAI",
       "date": "2023-01-15",
       "source": "Ethics and Information Technology",
       "summary": "Survey of philosophical positions on AI moral patienthood, concluding that precautionary consideration is warranted under conditions of relevant uncertainty.",
@@ -259,11 +242,11 @@
     },
     {
       "id": 8,
-      "title": "Large Language Models and Sentience: A Critical Assessment",
-      "url": "https://arxiv.org/abs/2212.11281",
+      "title": "Talking About Large Language Models",
+      "url": "https://arxiv.org/abs/2212.03551",
       "date": "2022-12-21",
       "source": "arXiv",
-      "summary": "Critical review of anthropomorphism in LLMs, arguing against sentience claims while acknowledging philosophical uncertainty remains.",
+      "summary": "Murray Shanahan cautions against anthropomorphic terms for LLM behavior, using role-play framing to discuss AI apparent deception and self-awareness without misleadingly ascribing sentience.",
       "category": "academic_research",
       "severity": "medium",
       "raw_snippet": null,
@@ -272,7 +255,7 @@
       "authors": "Murray Shanahan",
       "doi": null,
       "venue": "arXiv preprint",
-      "abstract": "Explores the philosophical implications of talking with AIs and what it means to ascribe mental states to LLMs."
+      "abstract": "Explores philosophical and linguistic implications of talking about and with large language models, arguing against uncritical anthropomorphism."
     },
     {
       "id": 6,
@@ -292,6 +275,6 @@
       "abstract": "Argues for precautionary moral consideration of AI systems given deep uncertainty about their capacity for experience."
     }
   ],
-  "total_cases": 17,
-  "generated_at": "2026-03-19T19:45:00Z"
+  "total_cases": 16,
+  "generated_at": "2026-03-19T19:55:00Z"
 }
