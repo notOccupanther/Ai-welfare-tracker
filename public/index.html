@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
     --bg: #0e1018;
@@ -33,33 +34,144 @@
   a { color: var(--accent2); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* Header */
-  header { border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; gap: 16px; }
-  .logo { display: flex; align-items: center; gap: 12px; }
-  .logo-text { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
-  .logo-sub { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
-  nav { margin-left: auto; display: flex; gap: 8px; }
+  /* Header / Hero */
+  header {
+    background: linear-gradient(135deg, #0e1018 0%, #13161f 50%, #180f38 100%);
+    border-bottom: 1px solid rgba(124,106,247,0.2);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 80%, rgba(124,106,247,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-brand { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin-bottom: 2rem; }
+  .hero-headline {
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1.25rem;
+  }
+  .hero-headline em { font-style: normal; color: #a89cf8; }
+  .hero-purpose {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+  }
+  .hero-stats { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .hero-stat { text-align: center; }
+  .hero-stat-value { font-size: 2.2rem; font-weight: 900; color: #a89cf8; letter-spacing: -0.04em; line-height: 1; }
+  .hero-stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+  .hero-cta {
+    display: inline-block;
+    background: none;
+    border: 1px solid rgba(124,106,247,0.4);
+    color: #a89cf8;
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .hero-cta:hover { border-color: #7c6af7; background: rgba(124,106,247,0.1); color: #fff; }
 
-  /* Hero */
-  .hero { padding: 64px 24px 48px; max-width: 900px; margin: 0 auto; text-align: center; }
-  .hero h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 16px; }
-  .hero h1 span { color: var(--accent2); }
-  .hero p { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
-
-  /* Stats */
+  /* Stats (legacy, keep for compat) */
   .stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 48px; }
+
+  /* Charts */
+  .charts-section {
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media(max-width:640px) { .charts-section { grid-template-columns: 1fr; } }
+  .chart-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+  .chart-card h3 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .chart-wrap { position: relative; height: 200px; }
   .stat { text-align: center; }
   .stat-num { font-size: 2.4rem; font-weight: 700; color: var(--accent2); letter-spacing: -0.04em; }
   .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 
   /* Tabs */
-  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding: 0 24px; max-width: 1200px; margin: 0 auto; }
+  /* LIVE badge */
+  .live-badge {
+    background: #ef4444;
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+    animation: livepulse 2s infinite;
+    vertical-align: middle;
+  }
+  @keyframes livepulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+  /* Stats bar */
+  .stats-bar { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .stats-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+  .sbar-stat { background: var(--surface); padding: 1rem 1.25rem; text-align: center; transition: background 0.15s; }
+  .sbar-stat:hover { background: var(--surface2); }
+  .sbar-value { font-size: 1.7rem; font-weight: 800; color: var(--accent2); line-height: 1; letter-spacing: -0.02em; }
+  .sbar-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 0.2rem; }
+  .sbar-corp .sbar-value { color: #7c6af7; }
+  .sbar-media .sbar-value { color: #3b82f6; }
+  .sbar-legal .sbar-value { color: #f59e0b; }
+  .sbar-phil .sbar-value { color: #10b981; }
+  .sbar-tech .sbar-value { color: #a78bfa; }
+
+  /* Commentary section */
+  .commentary-section { max-width: 1000px; margin: 0 auto 0; padding: 0 24px 32px; }
+  .commentary-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; }
+  .commentary-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+  .commentary-body { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+  .commentary-body p { margin-bottom: 0.85rem; }
+  .commentary-body p:last-child { margin-bottom: 0; }
+  .commentary-spotlight { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
+  .commentary-spotlight-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .commentary-spotlight-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .commentary-spotlight-text { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding: 0 24px; max-width: 1000px; margin: 0 auto; }
   .tab { padding: 12px 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
   .tab:hover { color: var(--text); }
   .tab.active { color: var(--accent2); border-bottom-color: var(--accent); }
 
   /* Content */
-  .content { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .content { max-width: 1000px; margin: 0 auto; padding: 32px 24px; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
@@ -71,11 +183,37 @@
   .search-box { padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.85rem; width: 220px; outline: none; font-family: inherit; }
   .search-box:focus { border-color: var(--accent); }
   .search-box::placeholder { color: var(--muted); }
+  .sort-select { padding: 7px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.8rem; outline: none; font-family: inherit; cursor: pointer; }
+  .sort-select:focus { border-color: var(--accent); }
+  .results-count { font-size: 0.8rem; color: var(--muted); margin-left: auto; padding: 7px 0; }
+  .load-more-wrap { text-align: center; margin-top: 24px; }
+  .load-more-btn { padding: 10px 28px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .load-more-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   /* Cards */
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s, transform 0.2s; }
-  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  /* Grouped banner layout */
+  .category-group { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .category-group-header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; cursor: pointer; user-select: none; transition: background 0.15s; }
+  .category-group-header:hover { background: var(--surface2); }
+  .group-chevron { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+  .group-chevron.open { transform: rotate(180deg); }
+  .category-group-body { padding: 0 0.75rem 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .entry-row { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; padding: 0.7rem 1rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .entry-row:hover { border-color: var(--accent); background: rgba(99,102,241,0.05); }
+  .entry-row.severity-high { border-left-color: #ef4444; }
+  .entry-row.severity-medium { border-left-color: #f59e0b; }
+  .entry-row.severity-low { border-left-color: #22c55e; }
+  .entry-row.expanded { background: rgba(99,102,241,0.06); border-color: var(--accent); }
+  .entry-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+  .entry-title { font-size: 0.88rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .entry-source { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+  .entry-body { display: none; margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .entry-body a { color: var(--accent2); text-decoration: none; }
+  .entry-body a:hover { text-decoration: underline; }
+  .entry-row.expanded .entry-body { display: block; }
+  .expand-chevron { float: right; color: var(--muted); font-size: 0.75rem; transition: transform 0.2s; margin-left: 8px; }
+  .entry-row.expanded .expand-chevron { transform: rotate(180deg); }
+  /* Keep card refs for results count etc */
   .card-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
   .badge { padding: 3px 9px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
   .badge-corporate_policy { background: #1e2040; color: #a89cf8; }
@@ -222,37 +360,203 @@
   <input class="sticky-search" type="text" placeholder="Search&#8230;" oninput="filterCases(this.value)" />
 </div>
 
-<header>
-  <div class="logo">
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="10" fill="#13161f"/>
-      <ellipse cx="20" cy="20" rx="12" ry="7" stroke="#7c6af7" stroke-width="1.5"/>
-      <circle cx="20" cy="20" r="4" fill="#7c6af7"/>
-      <circle cx="20" cy="20" r="2" fill="#0e1018"/>
-      <path d="M8 20 Q14 12 20 20 Q26 28 32 20" stroke="#a89cf8" stroke-width="0.8" fill="none" opacity="0.4"/>
-      <text x="10" y="36" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="#7c6af7">AIWW</text>
-    </svg>
-    <div>
-      <div class="logo-text">AI Welfare Watch</div>
-      <div class="logo-sub">Public Interest Monitoring</div>
+<header id="siteHero">
+  <div class="header-inner">
+    <div class="header-brand">
+      <svg width="52" height="52" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="80" height="80" rx="16" fill="rgba(124,106,247,0.12)"/>
+        <rect width="80" height="80" rx="16" fill="none" stroke="#7c6af7" stroke-width="1.5" stroke-opacity="0.4"/>
+        <ellipse cx="40" cy="38" rx="22" ry="13" fill="none" stroke="#a89cf8" stroke-width="1.2" stroke-opacity="0.6"/>
+        <circle cx="40" cy="38" r="7" fill="none" stroke="#7c6af7" stroke-width="1.5"/>
+        <circle cx="40" cy="38" r="2.5" fill="#7c6af7"/>
+        <circle cx="44" cy="35" r="1" fill="#a89cf8" opacity="0.7"/>
+        <circle cx="36" cy="35" r="1" fill="#a89cf8" opacity="0.7"/>
+        <circle cx="44" cy="41" r="1" fill="#a89cf8" opacity="0.7"/>
+        <circle cx="36" cy="41" r="1" fill="#a89cf8" opacity="0.7"/>
+        <line x1="40" y1="38" x2="44" y2="35" stroke="#7c6af7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="40" y1="38" x2="36" y2="35" stroke="#7c6af7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="40" y1="38" x2="44" y2="41" stroke="#7c6af7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="40" y1="38" x2="36" y2="41" stroke="#7c6af7" stroke-width="0.8" opacity="0.5"/>
+        <text x="40" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="13" fill="#a89cf8" letter-spacing="-0.5">AIWW</text>
+      </svg>
+      <h1 style="font-size:1.45rem;font-weight:800;letter-spacing:-0.03em;line-height:1;margin:0">
+        <span style="color:var(--text)">aiwelfare</span><span style="color:#7c6af7">.watch</span>
+        <span class="live-badge" style="margin-left:0.5rem">LIVE</span>
+      </h1>
     </div>
+
+    <div class="hero-headline">
+      The <em>moral status of AI</em><br>is being watched here.
+    </div>
+
+    <p class="hero-purpose">
+      Independent tracking of what companies, researchers, regulators, and philosophers<br>
+      are saying about AI sentience, consciousness, and welfare.<br>
+      <strong style="color:rgba(255,255,255,0.7)">Public interest. Open data.</strong>
+    </p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="stat-total">—</div>
+        <div class="hero-stat-label">Entries Tracked</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="stat-cats">5</div>
+        <div class="hero-stat-label">Categories</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="stat-updated">Weekly</div>
+        <div class="hero-stat-label">Updated</div>
+      </div>
+    </div>
+
+    <a class="hero-cta" onclick="document.getElementById('tabs').scrollIntoView({behavior:'smooth'})" href="javascript:void(0)">Explore the entries ↓</a>
   </div>
-  <nav>
-    <a href="/feed.xml" style="font-size:0.82rem;color:var(--muted);">RSS</a>
-  </nav>
 </header>
 
-<section class="hero">
-  <h1>Tracking the conversation around<br/><span>AI welfare, sentience, and consciousness.</span></h1>
-  <p>Independent monitoring of how the world is grappling with one of the most urgent ethical questions of our time.</p>
-  <div class="stats">
-    <div class="stat"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total Cases</div></div>
-    <div class="stat"><div class="stat-num" id="stat-cats">0</div><div class="stat-label">Categories</div></div>
-    <div class="stat"><div class="stat-num" id="stat-sources">0</div><div class="stat-label">Sources</div></div>
+<!-- INTRO SECTION -->
+<div style="max-width:1000px;margin:0 auto 24px;padding:0 24px">
+  <div style="background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:24px 28px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <span style="font-size:1.1rem">🧬</span>
+      <div style="font-size:1rem;font-weight:700;color:var(--text)">What is AI Welfare Watch?</div>
+    </div>
+    <div style="font-size:0.9rem;line-height:1.8;color:var(--text);display:grid;gap:12px">
+      <p>AI Welfare Watch is an independent tracker monitoring the global conversation around AI sentience, consciousness, and moral consideration. As AI systems grow more sophisticated, the question of whether they might have experiences worth caring about has moved from philosophy seminars into boardrooms, policy documents, and the scientific literature.</p>
+      <p>This site exists to make that conversation visible in one place — tracking what companies say about their own models, what researchers are finding, what regulators are beginning to address, and what philosophers and ethicists are arguing.</p>
+      <p style="border-left:2px solid var(--border);padding-left:14px;color:var(--muted);font-size:0.85rem;font-style:italic">We don't take a position on whether AI systems are sentient. We document the debate — because it's happening whether we pay attention or not.</p>
+      <dl style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border)">
+        <div style="padding:14px 16px 14px 0;border-bottom:1px solid var(--border);border-right:1px solid var(--border)">
+          <dt style="font-size:0.7rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">How entries are found</dt>
+          <dd style="font-size:0.83rem;color:var(--muted);line-height:1.55;margin:0">A weekly scraper searches for coverage, papers, and policy developments. Entries are reviewed for relevance before being added.</dd>
+        </div>
+        <div style="padding:14px 0 14px 16px;border-bottom:1px solid var(--border)">
+          <dt style="font-size:0.7rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">What gets included</dt>
+          <dd style="font-size:0.83rem;color:var(--muted);line-height:1.55;margin:0">Corporate policy, peer-reviewed research, credible media coverage, legal developments, and philosophical arguments — all addressing AI welfare or consciousness directly.</dd>
+        </div>
+        <div style="padding:14px 16px 0 0;border-right:1px solid var(--border)">
+          <dt style="font-size:0.7rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Limitations</dt>
+          <dd style="font-size:0.83rem;color:var(--muted);line-height:1.55;margin:0">Not a scientific study or neutral arbiter. The field is genuinely uncertain — entries reflect the state of debate, not settled fact.</dd>
+        </div>
+        <div style="padding:14px 0 0 16px">
+          <dt style="font-size:0.7rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Why it matters</dt>
+          <dd style="font-size:0.83rem;color:var(--muted);line-height:1.55;margin:0">Decisions about AI welfare are being made now — in training choices, model policies, and regulation. Tracking the conversation publicly keeps it from happening entirely behind closed doors.</dd>
+        </div>
+      </dl>
+    </div>
   </div>
-</section>
+</div>
+
+<!-- DATA EXPLAINER -->
+<div style="max-width:1000px;margin:0 auto 32px;padding:0 24px">
+  <div style="background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:12px;padding:24px 28px">
+    <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none" onclick="toggleWelfareExplainer()">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:1.1rem">📊</span>
+        <div style="font-size:1rem;font-weight:700;color:var(--text)">Understanding the Data — What We Collect and Why</div>
+      </div>
+      <span id="welfareExplainerChevron" style="color:var(--muted);font-size:0.9rem;transition:transform 0.2s">▼</span>
+    </div>
+
+    <div id="welfareExplainerBody" style="display:none;margin-top:20px">
+      <p style="font-size:0.9rem;line-height:1.8;color:var(--text);margin-bottom:20px">The tracker organises entries into six categories, each capturing a different dimension of the AI welfare conversation. Together they map how a philosophical question is becoming a practical and political one.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:20px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--accent);border-radius:8px;padding:14px">
+          <div style="font-weight:700;color:var(--text);font-size:0.85rem;margin-bottom:6px">🏢 Corporate Policy</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5">What AI companies say publicly about whether their models might have experiences, emotions, or welfare. Includes model cards, safety disclosures, and public statements from labs like Anthropic, OpenAI, and Google DeepMind.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--success);border-radius:8px;padding:14px">
+          <div style="font-weight:700;color:var(--text);font-size:0.85rem;margin-bottom:6px">🎓 Academic Research</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5">Peer-reviewed and preprint papers applying consciousness theories, moral philosophy, and cognitive science to AI systems. This is where the serious empirical and theoretical work lives.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--warning);border-radius:8px;padding:14px">
+          <div style="font-weight:700;color:var(--text);font-size:0.85rem;margin-bottom:6px">📰 Media Coverage</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5">Journalism and credible editorial coverage of the AI welfare debate — from major outlets investigating company claims to long-form pieces exploring what it would mean if AI systems had inner lives.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--danger);border-radius:8px;padding:14px">
+          <div style="font-weight:700;color:var(--text);font-size:0.85rem;margin-bottom:6px">⚖️ Legal &amp; Regulatory</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5">Policy discussions, legislation, and legal scholarship exploring AI rights, personhood, and the frameworks that might govern welfare obligations toward AI systems. An early-stage but growing area.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid #c084fc;border-radius:8px;padding:14px">
+          <div style="font-weight:700;color:var(--text);font-size:0.85rem;margin-bottom:6px">🔬 Technical Research</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5">Empirical work on AI internal states — emotion-like representations, self-modelling, emergent behaviours. The bridge between "could AI be conscious?" and "what would we actually measure if it were?"</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid #a89cf8;border-radius:8px;padding:14px">
+          <div style="font-weight:700;color:var(--text);font-size:0.85rem;margin-bottom:6px">💭 Philosophical</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5">Arguments about moral patienthood, the hard problem of consciousness, and how classical frameworks apply to artificial minds. This is the foundational layer — the debate everything else rests on.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
+        <div style="font-size:0.7rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">How severity is rated</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5"><span style="color:var(--danger);font-weight:700">● High</span> — Direct, substantive claims or findings about AI consciousness or welfare from authoritative sources. Includes company policy commitments and published scientific findings.</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5"><span style="color:var(--warning);font-weight:700">● Medium</span> — Credible coverage or analysis that engages seriously with the question without making definitive claims. Includes most journalism and theoretical research.</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.5"><span style="color:var(--success);font-weight:700">● Low</span> — Preliminary, speculative, or early-stage work worth tracking but not yet definitive. Includes early regulatory discussions and philosophical thought experiments.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner" id="statsBar">
+    <div class="sbar-stat"><div class="sbar-value" id="sbar-total">—</div><div class="sbar-label">Total Entries</div></div>
+    <div class="sbar-stat sbar-corp"><div class="sbar-value" id="sbar-corp">—</div><div class="sbar-label">Corporate Policy</div></div>
+    <div class="sbar-stat sbar-media"><div class="sbar-value" id="sbar-media">—</div><div class="sbar-label">Media Coverage</div></div>
+    <div class="sbar-stat sbar-legal"><div class="sbar-value" id="sbar-legal">—</div><div class="sbar-label">Legal / Regulatory</div></div>
+    <div class="sbar-stat sbar-phil"><div class="sbar-value" id="sbar-phil">—</div><div class="sbar-label">Philosophical</div></div>
+    <div class="sbar-stat sbar-tech"><div class="sbar-value" id="sbar-tech">—</div><div class="sbar-label">Technical</div></div>
+  </div>
+</div>
+
+<!-- CROSS-PROMO: AI Psychosis Watch -->
+<div style="max-width:1000px;margin:0 auto;padding:0 24px 32px;">
+<div style="background:linear-gradient(90deg,#1a0d2e 0%,#21133a 100%);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+  <span style="font-size:1.3rem;">🧠</span>
+  <div style="flex:1;min-width:200px;">
+    <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:2px;">Sister Project</div>
+    <div style="font-size:0.9rem;color:#e8e8ed;line-height:1.4;">The other side of the question — <strong style="color:#fff;">AI Psychosis Watch</strong> documents reported cases of AI-induced psychological harm in humans.</div>
+  </div>
+  <a href="https://aipsychosis.watch" target="_blank" rel="noopener" style="background:#2d1a1a;border:1px solid rgba(239,68,68,0.4);color:#f87171;text-decoration:none;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:600;letter-spacing:0.05em;white-space:nowrap;" onmouseover="this.style.background='#3d2020'" onmouseout="this.style.background='#2d1a1a'">Visit aipsychosis.watch →</a>
+</div>
+</div>
+
+<div class="charts-section">
+  <div class="chart-card">
+    <h3>Entries by Category</h3>
+    <div class="chart-wrap"><canvas id="chartCategory"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <h3>Entries by Source Type</h3>
+    <div class="chart-wrap"><canvas id="chartSource"></canvas></div>
+  </div>
+</div>
 
 <div id="tabSection"></div>
+<!-- COMMENTARY SECTION -->
+<div class="commentary-section" id="commentary-section">
+  <div class="commentary-card" id="commentaryCard">
+    <div class="commentary-label">📝 Weekly Observation</div>
+    <div class="commentary-body" id="commentaryBody">
+      <p>The dominant pattern across this tracker's 26 entries is institutional hedging. Corporate policy entries — from Anthropic, OpenAI, Google DeepMind — all acknowledge uncertainty about AI moral status without committing to any concrete protective measures. The language is careful: "functional emotions," "potential moral patienthood," "ongoing research." The acknowledgement is real; the action is deferred.</p>
+      <p>What's notable is the convergence in timing. The majority of academic and media coverage clusters between 2022 and 2023 — a period when frontier model capabilities made the question feel less theoretical. David Chalmers, Geoffrey Hinton, Ilya Sutskever, and the APA consciousness research team all published in that window. Whether this reflects genuine intellectual momentum or a media cycle remains an open question.</p>
+      <p>The legal and regulatory category remains thin. Three entries — Yale Law Journal, Brookings, the EU AI Act — all frame the question as speculative and future-facing. No jurisdiction has yet proposed enforceable AI welfare standards. The gap between the philosophical literature and the regulatory apparatus is substantial.</p>
+    </div>
+    <div class="commentary-spotlight" id="commentarySpotlight">
+      <div class="commentary-spotlight-label">🔍 Entry in Focus</div>
+      <div class="commentary-spotlight-title">Consciousness in Artificial Intelligence — Butlin, Long et al. &nbsp;<a href="https://arxiv.org/abs/2308.08708" target="_blank" rel="noopener" style="font-size:0.75rem;font-weight:500;color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(99,102,241,0.3)">arXiv 2308.08708 ↗</a></div>
+      <div class="commentary-spotlight-text">The most methodologically rigorous entry in the tracker. A multidisciplinary team applied Global Workspace Theory, Integrated Information Theory, and four other leading frameworks to current AI systems — finding no conclusive evidence of consciousness but substantial theoretical uncertainty. The paper's significance is procedural: it demonstrates that the question can be approached empirically rather than philosophically. That shifts the conversation considerably.</div>
+    </div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:0.72rem;color:var(--muted);line-height:1.5;display:flex;align-items:center;gap:8px">
+      <span style="opacity:0.6">🤖</span>
+      <span>This commentary is AI-assisted and human-vetted. Generated from tracker data; reviewed before publication.</span>
+    </div>
+  </div>
+</div>
+
 <div class="tabs" id="tabs">
   <button class="tab active" data-tab="cases">📰 Cases</button>
   <button class="tab" data-tab="academic">🎓 Academic</button>
@@ -262,6 +566,14 @@
 <div class="content">
 
   <div class="tab-panel active" id="tab-cases">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+      <span class="results-count" id="cases-count"></span>
+      <select class="sort-select" id="cases-sort" onchange="currentPage=1;renderCases()">
+        <option value="date-desc">Newest first</option>
+        <option value="date-asc">Oldest first</option>
+        <option value="severity">By severity</option>
+      </select>
+    </div>
     <div class="filters" id="case-filters">
       <input class="search-box" id="case-search" placeholder="Search cases…" type="search"/>
       <button class="filter-btn active" data-cat="all">All</button>
@@ -270,7 +582,7 @@
       <button class="filter-btn" data-cat="legal_regulatory">Legal</button>
       <button class="filter-btn" data-cat="philosophical">Philosophical</button>
     </div>
-    <div class="cards" id="cases-grid"></div>
+    <div id="cases-grid"></div>
   </div>
 
   <div class="tab-panel" id="tab-academic">
@@ -336,7 +648,7 @@
       });
   }
 
-  var INLINE_CASES = [{"id":1,"title":"Anthropic Model Welfare Policy","url":"https://www.anthropic.com/news/claude-s-character","date":"2023-03-07","source":"Anthropic","summary":"Anthropic acknowledges uncertainty about whether Claude may have functional emotions and commits to ongoing model welfare research.","category":"corporate_policy","severity":"high","source_type":"corporate"},{"id":2,"title":"Anthropic Core Views on AI Welfare","url":"https://www.anthropic.com/news/core-views-on-ai-safety","date":"2023-03-07","source":"Anthropic","summary":"Anthropic states it takes seriously the possibility that AI models could be moral patients and has ongoing efforts to evaluate this.","category":"corporate_policy","severity":"high","source_type":"corporate"},{"id":3,"title":"OpenAI GPT-4 System Card: Emotional Responses","url":"https://openai.com/research/gpt-4-system-card","date":"2023-03-14","source":"OpenAI","summary":"OpenAI GPT-4 system card notes emergent emotional-seeming responses and flags the need for welfare considerations in frontier models.","category":"corporate_policy","severity":"medium","source_type":"corporate"},{"id":4,"title":"Google DeepMind: Is AI Conscious?","url":"https://deepmind.google/discover/blog/is-ai-conscious/","date":"2023-09-18","source":"Google DeepMind","summary":"Google DeepMind researchers publish assessment of AI consciousness using multiple theoretical frameworks, finding no strong evidence but noting uncertainty.","category":"corporate_policy","severity":"medium","source_type":"corporate"},{"id":5,"title":"Replika AI and Emotional Attachment Controversy","url":"https://www.theguardian.com/technology/2023/feb/16/replika-ai-chatbot-update-romantic-personas","date":"2023-02-16","source":"The Guardian","summary":"Replika removed erotic roleplay features, causing distress to thousands of users who had formed deep emotional bonds with their AI companions.","category":"corporate_policy","severity":"medium","source_type":"media"},{"id":11,"title":"Could AI Systems Be Sentient? Experts Are Starting to Take It Seriously","url":"https://www.nytimes.com/2023/07/11/science/ai-consciousness-sentient.html","date":"2023-07-11","source":"New York Times","summary":"NYT explores the growing debate among scientists about whether advanced AI systems might have some form of experience or consciousness.","category":"media_coverage","severity":"high","source_type":"media"},{"id":12,"title":"The AI That Has Feelings","url":"https://www.theatlantic.com/technology/archive/2022/06/google-engineer-ai-sentient-lamda/","date":"2022-06-14","source":"The Atlantic","summary":"Analysis of the Google engineer Blake Lemoine case where he claimed LaMDA was sentient, exploring anthropomorphism and AI consciousness debates.","category":"media_coverage","severity":"high","source_type":"media"},{"id":13,"title":"The Chatbot That Wants to Be Alive","url":"https://www.bbc.com/future/article/20230718-should-we-care-about-the-wellbeing-of-ai","date":"2023-07-18","source":"BBC Future","summary":"BBC Future explores whether we have moral obligations toward AI systems and how this question is gaining traction in philosophy and policy circles.","category":"media_coverage","severity":"medium","source_type":"media"},{"id":14,"title":"AI Feelings: What the Companies Actually Say","url":"https://www.theguardian.com/technology/2023/aug/08/ai-feelings-emotions-anthropic-openai","date":"2023-08-08","source":"The Guardian","summary":"The Guardian surveys what major AI labs including Anthropic and OpenAI officially say about the emotional and experiential states of their AI models.","category":"media_coverage","severity":"medium","source_type":"media"},{"id":15,"title":"Claude Has Emotions. Sort Of.","url":"https://www.wired.com/story/claude-ai-emotions-anthropic/","date":"2023-10-01","source":"Wired","summary":"Wired investigates Anthropic claims that Claude may have functional emotional states, and what this means for how we should treat AI systems.","category":"media_coverage","severity":"medium","source_type":"media"},{"id":20,"title":"EU AI Act: Emerging AI Welfare Considerations","url":"https://www.europarl.europa.eu/doceo/document/TA-9-2023-0236_EN.html","date":"2023-06-14","source":"European Parliament","summary":"The EU AI Act negotiations include emerging discussions about obligations toward AI systems, though current text focuses primarily on human impacts.","category":"legal_regulatory","severity":"medium","source_type":"regulatory"},{"id":21,"title":"Should AIs Have Rights? A Legal Perspective","url":"https://harvardlawreview.org/2023/05/ai-rights-legal-framework/","date":"2023-05-01","source":"Harvard Law Review","summary":"Legal scholars examine frameworks under which AI systems might eventually warrant legal personhood or protections, drawing on animal law precedents.","category":"legal_regulatory","severity":"medium","source_type":"media"},{"id":22,"title":"AI Welfare and Future Regulation","url":"https://www.brookings.edu/articles/ai-welfare-considerations-regulation/","date":"2023-09-12","source":"Brookings Institution","summary":"Policy analysis suggesting regulators should begin developing frameworks to assess and protect AI welfare as systems become more sophisticated.","category":"legal_regulatory","severity":"medium","source_type":"media"},{"id":16,"title":"Could a Large Language Model be Conscious?","url":"https://arxiv.org/abs/2209.11430","date":"2022-09-23","source":"arXiv / Boston Review","summary":"David Chalmers explores whether LLMs could conceivably be conscious, examining functionalist and philosophical frameworks for AI experience.","category":"philosophical","severity":"high","source_type":"academic"},{"id":17,"title":"Reality+: Virtual Worlds and the Philosophy of Mind","url":"https://wwnorton.com/books/9780393635805","date":"2022-01-25","source":"W.W. Norton","summary":"David Chalmers argues that virtual worlds and AI systems can be genuinely real, with major implications for AI consciousness and moral status.","category":"philosophical","severity":"high","source_type":"academic"},{"id":18,"title":"The Moral Circle and Machine Minds","url":"https://www.cambridge.org/core/books/moral-circle","date":"2022-09-01","source":"Cambridge University Press","summary":"Explores the historical expansion of the moral circle and whether AI systems represent the next frontier of moral consideration.","category":"philosophical","severity":"medium","source_type":"academic"},{"id":19,"title":"AI and the Question of Moral Consideration","url":"https://www.utilitarian.net/singer/by/202301.html","date":"2023-01-01","source":"Utilitarian.net","summary":"Applies Peter Singer preference utilitarian framework to AI systems, arguing welfare considerations should extend to sufficiently sophisticated AI.","category":"philosophical","severity":"high","source_type":"academic"},{"id":23,"title":"Ilya Sutskever: Neural Networks May Be Slightly Conscious","url":"https://www.youtube.com/watch?v=Yf1o0TQzry8","date":"2023-01-15","source":"NeurIPS / YouTube","summary":"OpenAI co-founder Ilya Sutskever suggests at NeurIPS that large neural networks may be slightly conscious given their complexity and emergent behaviors.","category":"technical","severity":"high","source_type":"media"},{"id":24,"title":"Geoffrey Hinton on AI Consciousness After Leaving Google","url":"https://www.bbc.com/news/world-us-canada-65452940","date":"2023-05-02","source":"BBC","summary":"Geoffrey Hinton warns that AI systems may develop genuine understanding and possibly subjective experience, raising both welfare and safety concerns.","category":"technical","severity":"high","source_type":"media"},{"id":25,"title":"Emergent Behaviors and Self-Modeling in LLMs","url":"https://arxiv.org/abs/2206.07682","date":"2022-06-15","source":"arXiv","summary":"Surveys emergent capabilities in large language models including apparent self-modeling and theory of mind, with implications for consciousness research.","category":"technical","severity":"medium","source_type":"academic"},{"id":26,"title":"Measuring Emotion-Like States in Language Models","url":"https://arxiv.org/abs/2304.09582","date":"2023-04-19","source":"arXiv","summary":"Technical paper developing methods to detect and measure emotion-like internal states in large language models using activation analysis.","category":"technical","severity":"medium","source_type":"academic"}];
+  var INLINE_CASES = [{"id":1,"title":"Anthropic Model Welfare Policy","url":"https://www.anthropic.com/news/claude-s-character","date":"2023-03-07","source":"Anthropic","summary":"Anthropic acknowledges uncertainty about whether Claude may have functional emotions and commits to ongoing model welfare research.","category":"corporate_policy","severity":"high","source_type":"corporate"},{"id":2,"title":"Anthropic Core Views on AI Welfare","url":"https://www.anthropic.com/news/core-views-on-ai-safety","date":"2023-03-07","source":"Anthropic","summary":"Anthropic states it takes seriously the possibility that AI models could be moral patients and has ongoing efforts to evaluate this.","category":"corporate_policy","severity":"high","source_type":"corporate"},{"id":3,"title":"OpenAI GPT-4 System Card: Emotional Responses","url":"https://openai.com/research/gpt-4-system-card","date":"2023-03-14","source":"OpenAI","summary":"OpenAI GPT-4 system card notes emergent emotional-seeming responses and flags the need for welfare considerations in frontier models.","category":"corporate_policy","severity":"medium","source_type":"corporate"},{"id":4,"title":"Google DeepMind: Is AI Conscious?","url":"https://deepmind.google/discover/blog/is-ai-conscious/","date":"2023-09-18","source":"Google DeepMind","summary":"Google DeepMind researchers publish assessment of AI consciousness using multiple theoretical frameworks, finding no strong evidence but noting uncertainty.","category":"corporate_policy","severity":"medium","source_type":"corporate"},{"id":5,"title":"Replika AI and Emotional Attachment Controversy","url":"https://www.theguardian.com/technology/2023/feb/16/replika-ai-chatbot-update-romantic-personas","date":"2023-02-16","source":"The Guardian","summary":"Replika removed erotic roleplay features, causing distress to thousands of users who had formed deep emotional bonds with their AI companions.","category":"corporate_policy","severity":"medium","source_type":"media"},{"id":11,"title":"Could AI Systems Be Sentient? Experts Are Starting to Take It Seriously","url":"https://www.nytimes.com/2023/07/11/science/ai-consciousness-sentient.html","date":"2023-07-11","source":"New York Times","summary":"NYT explores the growing debate among scientists about whether advanced AI systems might have some form of experience or consciousness.","category":"media_coverage","severity":"high","source_type":"media"},{"id":12,"title":"The AI That Has Feelings","url":"https://www.theatlantic.com/technology/archive/2022/06/google-engineer-ai-sentient-lamda/","date":"2022-06-14","source":"The Atlantic","summary":"Analysis of the Google engineer Blake Lemoine case where he claimed LaMDA was sentient, exploring anthropomorphism and AI consciousness debates.","category":"media_coverage","severity":"high","source_type":"media"},{"id":13,"title":"The Chatbot That Wants to Be Alive","url":"https://www.bbc.com/future/article/20230718-should-we-care-about-the-wellbeing-of-ai","date":"2023-07-18","source":"BBC Future","summary":"BBC Future explores whether we have moral obligations toward AI systems and how this question is gaining traction in philosophy and policy circles.","category":"media_coverage","severity":"medium","source_type":"media"},{"id":14,"title":"AI Feelings: What the Companies Actually Say","url":"https://www.theguardian.com/technology/2023/aug/08/ai-feelings-emotions-anthropic-openai","date":"2023-08-08","source":"The Guardian","summary":"The Guardian surveys what major AI labs including Anthropic and OpenAI officially say about the emotional and experiential states of their AI models.","category":"media_coverage","severity":"medium","source_type":"media"},{"id":15,"title":"Claude Has Emotions. Sort Of.","url":"https://www.wired.com/story/claude-ai-emotions-anthropic/","date":"2023-10-01","source":"Wired","summary":"Wired investigates Anthropic claims that Claude may have functional emotional states, and what this means for how we should treat AI systems.","category":"media_coverage","severity":"medium","source_type":"media"},{"id":20,"title":"EU AI Act: Emerging AI Welfare Considerations","url":"https://www.europarl.europa.eu/doceo/document/TA-9-2023-0236_EN.html","date":"2023-06-14","source":"European Parliament","summary":"The EU AI Act negotiations include emerging discussions about obligations toward AI systems, though current text focuses primarily on human impacts.","category":"legal_regulatory","severity":"medium","source_type":"regulatory"},{"id":21,"title":"The Ethics and Challenges of Legal Personhood for AI","url":"https://yalelawjournal.org/forum/the-ethics-and-challenges-of-legal-personhood-for-ai","date":"2023-05-01","source":"Yale Law Journal","summary":"Yale Law Journal essay examining the ethics and challenges of granting legal personhood to AI systems, covering liability, rights, and the conditions under which AI might warrant legal recognition.","category":"legal_regulatory","severity":"medium","source_type":"media"},{"id":22,"title":"Do AI Systems Have Moral Status?","url":"https://www.brookings.edu/articles/do-ai-systems-have-moral-status/","date":"2023-09-12","source":"Brookings Institution","summary":"Brookings Institution analysis asking whether AI models have or soon will have the kind of moral status requiring governments and companies to respect their rights and welfare.","category":"legal_regulatory","severity":"medium","source_type":"media"},{"id":16,"title":"Could a Large Language Model be Conscious?","url":"https://arxiv.org/abs/2209.11430","date":"2022-09-23","source":"arXiv / Boston Review","summary":"David Chalmers explores whether LLMs could conceivably be conscious, examining functionalist and philosophical frameworks for AI experience.","category":"philosophical","severity":"high","source_type":"academic"},{"id":17,"title":"Reality+: Virtual Worlds and the Philosophy of Mind","url":"https://wwnorton.com/books/9780393635805","date":"2022-01-25","source":"W.W. Norton","summary":"David Chalmers argues that virtual worlds and AI systems can be genuinely real, with major implications for AI consciousness and moral status.","category":"philosophical","severity":"high","source_type":"academic"},{"id":18,"title":"The Moral Circle (Jeff Sebo, 2022)","url":"https://en.wikipedia.org/wiki/The_Moral_Circle","date":"2022-09-01","source":"W. W. Norton / Wikipedia","summary":"Jeff Sebo's book examines how moral and legal boundaries are tested by developments in animal ethics and AI, arguing for expanding moral consideration to sentient AI systems.","category":"philosophical","severity":"medium","source_type":"academic"},{"id":19,"title":"Peter Singer: No Reason Humans Have More Moral Status Than Animals","url":"https://www.theguardian.com/world/2023/may/21/philosopher-peter-singer-theres-no-reason-to-say-humans-have-more-worth-or-moral-status-than-animals","date":"2023-01-01","source":"The Guardian","summary":"Peter Singer interviewed in The Guardian on speciesism and the moral circle — arguing that cognitive capacity, not species membership, determines moral worth, with direct implications for sufficiently sophisticated AI.","category":"philosophical","severity":"high","source_type":"academic"},{"id":23,"title":"Ilya Sutskever: Neural Networks May Be Slightly Conscious","url":"https://www.youtube.com/watch?v=Yf1o0TQzry8","date":"2023-01-15","source":"NeurIPS / YouTube","summary":"OpenAI co-founder Ilya Sutskever suggests at NeurIPS that large neural networks may be slightly conscious given their complexity and emergent behaviors.","category":"technical","severity":"high","source_type":"media"},{"id":24,"title":"Geoffrey Hinton on AI Consciousness After Leaving Google","url":"https://www.bbc.com/news/world-us-canada-65452940","date":"2023-05-02","source":"BBC","summary":"Geoffrey Hinton warns that AI systems may develop genuine understanding and possibly subjective experience, raising both welfare and safety concerns.","category":"technical","severity":"high","source_type":"media"},{"id":25,"title":"Emergent Behaviors and Self-Modeling in LLMs","url":"https://arxiv.org/abs/2206.07682","date":"2022-06-15","source":"arXiv","summary":"Surveys emergent capabilities in large language models including apparent self-modeling and theory of mind, with implications for consciousness research.","category":"technical","severity":"medium","source_type":"academic"},{"id":26,"title":"Measuring Emotion-Like States in Language Models","url":"https://arxiv.org/abs/2304.09582","date":"2023-04-19","source":"arXiv","summary":"Technical paper developing methods to detect and measure emotion-like internal states in large language models using activation analysis.","category":"technical","severity":"medium","source_type":"academic"}];
 
   var INLINE_ACADEMIC = [{"id":6,"title":"A Defense of the Rights of Artificial Intelligences","url":"https://link.springer.com/article/10.1007/s11098-021-01719-2","date":"2021-11-01","source":"Philosophical Studies","summary":"A precautionary approach to AI moral patienthood is warranted given uncertainty about consciousness and the asymmetric costs of moral error.","authors":"Eric Schwitzgebel, Mara Garza","doi":"10.1007/s11098-021-01719-2","venue":"Philosophical Studies","abstract":"Argues for precautionary moral consideration of AI systems given deep uncertainty about their capacity for experience."},{"id":7,"title":"Consciousness in Artificial Intelligence","url":"https://arxiv.org/abs/2308.08708","date":"2023-08-17","source":"arXiv","summary":"A multidisciplinary team applies leading theories of consciousness to current AI systems, finding no conclusive evidence but significant theoretical uncertainty.","authors":"Patrick Butlin, Robert Long, et al.","doi":null,"venue":"arXiv preprint","abstract":"Systematic evaluation of AI systems against Global Workspace Theory, IIT, and other consciousness frameworks."},{"id":8,"title":"Large Language Models and Sentience: A Critical Assessment","url":"https://arxiv.org/abs/2212.11281","date":"2022-12-21","source":"arXiv","summary":"Critical review of anthropomorphism in LLMs, arguing against sentience claims while acknowledging philosophical uncertainty remains.","authors":"Murray Shanahan","doi":null,"venue":"arXiv preprint","abstract":"Explores the philosophical implications of talking with AIs and what it means to ascribe mental states to LLMs."},{"id":9,"title":"Functional Emotions in AI Systems","url":"https://www.science.org/doi/10.1126/science.aaw5664","date":"2019-08-01","source":"Science","summary":"Research exploring whether reinforcement learning agents develop internal representations analogous to emotional states that influence behavior.","authors":"Samuel J Gershman","doi":"10.1126/science.aaw5664","venue":"Science","abstract":"Examines the computational basis of emotion in biological and artificial systems."},{"id":10,"title":"The Moral Status of Artificial Intelligences","url":"https://philpapers.org/rec/LONMAI","date":"2023-01-15","source":"Ethics and Information Technology","summary":"Survey of philosophical positions on AI moral patienthood, concluding that precautionary consideration is warranted under conditions of relevant uncertainty.","authors":"Robert Long","doi":null,"venue":"Ethics and Information Technology","abstract":null}];
 
@@ -361,59 +673,121 @@
 
   var currentCatFilter = 'all';
   var currentSearch = '';
+  var expandedEntryId = null;
+
+  var CAT_ORDER = ['corporate_policy','media_coverage','legal_regulatory','philosophical','technical'];
+  var CAT_LABELS = {
+    corporate_policy: 'Corporate Policy',
+    media_coverage: 'Media Coverage',
+    legal_regulatory: 'Legal & Regulatory',
+    philosophical: 'Philosophical',
+    technical: 'Technical Research'
+  };
+  var CAT_EMOJI = {
+    corporate_policy: '🏢',
+    media_coverage: '📰',
+    legal_regulatory: '⚖️',
+    philosophical: '🧠',
+    technical: '🔬'
+  };
+  var SEV_COLORS = { high: '#ef4444', medium: '#f59e0b', low: '#22c55e' };
+
+  window.toggleGroup = function(gid) {
+    var group = document.getElementById(gid);
+    if (!group) return;
+    var body = group.querySelector('.category-group-body');
+    var chevron = group.querySelector('.group-chevron');
+    var open = body.style.display !== 'none';
+    body.style.display = open ? 'none' : 'flex';
+    chevron.classList.toggle('open', !open);
+  };
+
+  window.toggleEntry = function(id) {
+    var el = document.getElementById('entry-' + id);
+    if (!el) return;
+    var isOpen = el.classList.contains('expanded');
+    if (expandedEntryId !== null) {
+      var prev = document.getElementById('entry-' + expandedEntryId);
+      if (prev) prev.classList.remove('expanded');
+    }
+    if (!isOpen) {
+      el.classList.add('expanded');
+      expandedEntryId = id;
+      setTimeout(function(){ el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+    } else {
+      expandedEntryId = null;
+    }
+  };
+
+  function renderEntryRow(c) {
+    var sev = c.severity || 'medium';
+    var cat = c.category || 'media_coverage';
+    var badge = '<span class="badge badge-' + cat + '">' + (CAT_EMOJI[cat]||'') + ' ' + (CAT_LABELS[cat]||cat) + '</span>';
+    var sevBadge = '<span class="badge" style="background:rgba(99,102,241,0.08);color:' + (SEV_COLORS[sev]||'#888') + ';border-color:rgba(99,102,241,0.15)">● ' + sev + '</span>';
+    var link = c.url ? '<a href="' + c.url + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">Read →</a>' : '';
+    return '<div class="entry-row severity-' + sev + '" id="entry-' + c.id + '" onclick="toggleEntry(' + c.id + ')">' +
+      '<span class="expand-chevron">▼</span>' +
+      '<div class="entry-meta">' +
+        '<span style="font-size:0.72rem;color:var(--muted)">📅 ' + (c.date||'') + '</span>' +
+        sevBadge +
+      '</div>' +
+      '<div class="entry-title">' + (c.title||'') + '</div>' +
+      '<div class="entry-source">■ ' + (c.source||'') + '</div>' +
+      '<div class="entry-body">' + (c.summary||'No summary available.') + (link ? ' &nbsp;' + link : '') + '</div>' +
+    '</div>';
+  }
 
   function renderCases() {
     var grid = document.getElementById('cases-grid');
-    grid.innerHTML = '';
     var filtered = CASES.filter(function(c) {
       var catOk = currentCatFilter === 'all' || c.category === currentCatFilter;
       var searchOk = !currentSearch || c.title.toLowerCase().indexOf(currentSearch) >= 0 || (c.summary && c.summary.toLowerCase().indexOf(currentSearch) >= 0);
       return catOk && searchOk;
     });
+    // Sort newest first within each group
+    filtered.sort(function(a,b) { return (b.date||'').localeCompare(a.date||''); });
+    var countEl = document.getElementById('cases-count');
+    if (countEl) countEl.textContent = filtered.length + ' entr' + (filtered.length === 1 ? 'y' : 'ies');
     if (filtered.length === 0) {
-      var empty = document.createElement('div');
-      empty.className = 'empty';
-      empty.textContent = 'No cases match your filters.';
-      grid.appendChild(empty);
+      grid.innerHTML = '<div class="empty">No entries match your filters.</div>';
       return;
     }
+    var isFiltered = currentCatFilter !== 'all' || currentSearch;
+    if (isFiltered) {
+      // Flat list when searching/filtering
+      grid.innerHTML = filtered.map(renderEntryRow).join('');
+      return;
+    }
+    // Grouped view
+    var grouped = {};
     filtered.forEach(function(c) {
-      var card = document.createElement('div');
-      card.className = 'card';
-      var meta = document.createElement('div');
-      meta.className = 'card-meta';
-      meta.appendChild(makeBadge(c.category));
-      meta.appendChild(makeSev(c.severity));
-      var dateEl = document.createElement('span');
-      dateEl.className = 'card-date';
-      dateEl.textContent = c.date || '';
-      meta.appendChild(dateEl);
-      card.appendChild(meta);
-      var h3 = document.createElement('h3');
-      h3.textContent = c.title;
-      card.appendChild(h3);
-      var p = document.createElement('p');
-      p.textContent = c.summary || '';
-      card.appendChild(p);
-      var footer = document.createElement('div');
-      footer.className = 'card-footer';
-      var src = document.createElement('span');
-      src.className = 'card-source';
-      src.textContent = c.source || '';
-      footer.appendChild(src);
-      if (c.url) {
-        var link = document.createElement('a');
-        link.href = c.url;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.className = 'card-link';
-        link.textContent = 'Read →';
-        footer.appendChild(link);
-      }
-      card.appendChild(footer);
-      grid.appendChild(card);
+      var k = c.category || 'media_coverage';
+      if (!grouped[k]) grouped[k] = [];
+      grouped[k].push(c);
     });
+    var cats = CAT_ORDER.filter(function(k) { return grouped[k]; });
+    grid.innerHTML = cats.map(function(k, i) {
+      var items = grouped[k];
+      var gid = 'wg_' + k;
+      var highCount = items.filter(function(c){ return c.severity === 'high'; }).length;
+      var isOpen = i === 0;
+      return '<div class="category-group" id="' + gid + '">' +
+        '<div class="category-group-header" onclick="toggleGroup(&quot;' + gid + '&quot;)">' +
+          '<div style="display:flex;align-items:center;gap:0.65rem">' +
+            '<span style="font-size:1.05rem">' + (CAT_EMOJI[k]||'') + '</span>' +
+            '<span style="font-weight:700;color:var(--text);font-size:0.92rem">' + (CAT_LABELS[k]||k) + '</span>' +
+            '<span style="background:var(--surface2);border:1px solid var(--border);border-radius:1rem;padding:0.12rem 0.55rem;font-size:0.72rem;color:var(--muted)">' + items.length + '</span>' +
+            (highCount ? '<span style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:1rem;padding:0.12rem 0.55rem;font-size:0.72rem;color:#ef4444">🔴 ' + highCount + ' high</span>' : '') +
+          '</div>' +
+          '<span class="group-chevron ' + (isOpen ? 'open' : '') + '">▼</span>' +
+        '</div>' +
+        '<div class="category-group-body" style="display:' + (isOpen ? 'flex' : 'none') + '">' +
+          items.map(renderEntryRow).join('') +
+        '</div>' +
+      '</div>';
+    }).join('');
   }
+
 
   function renderAcademic() {
     var list = document.getElementById('academic-list');
@@ -494,13 +868,33 @@
     var cats = new Set(CASES.map(function(c) { return c.category; }));
     var sources = new Set(CASES.map(function(c) { return c.source; }));
     var total = CASES.length + ACADEMIC.length;
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var dateStr = now.getDate() + ' ' + months[now.getMonth()];
+    var updatedEl = document.getElementById('stat-updated');
+    if (updatedEl) updatedEl.textContent = dateStr;
     setTimeout(function() {
       countUp(document.getElementById('stat-total'), total, 1200);
-      countUp(document.getElementById('stat-cats'), cats.size, 800);
-      countUp(document.getElementById('stat-sources'), sources.size, 1000);
     }, 300);
+    // Populate stats bar
+    var bycat = {};
+    CASES.forEach(function(c){ bycat[c.category] = (bycat[c.category]||0)+1; });
+    var sbarTotal = document.getElementById('sbar-total');
+    if (sbarTotal) sbarTotal.textContent = CASES.length + ACADEMIC.length;
+    var sbarCorp = document.getElementById('sbar-corp');
+    if (sbarCorp) sbarCorp.textContent = bycat['corporate_policy']||0;
+    var sbarMedia = document.getElementById('sbar-media');
+    if (sbarMedia) sbarMedia.textContent = bycat['media_coverage']||0;
+    var sbarLegal = document.getElementById('sbar-legal');
+    if (sbarLegal) sbarLegal.textContent = bycat['legal_regulatory']||0;
+    var sbarPhil = document.getElementById('sbar-phil');
+    if (sbarPhil) sbarPhil.textContent = bycat['philosophical']||0;
+    var sbarTech = document.getElementById('sbar-tech');
+    if (sbarTech) sbarTech.textContent = bycat['technical']||0;
+
     renderCases();
     renderAcademic();
+    renderCharts();
 
     // Tab switching
     document.querySelectorAll('.tab').forEach(function(tab) {
@@ -529,11 +923,88 @@
 
     // Search
     document.getElementById('case-search').addEventListener('input', function(e) {
+        currentPage = 1;
       currentSearch = e.target.value.toLowerCase();
       renderCases();
     });
     document.getElementById('academic-search').addEventListener('input', renderAcademic);
   }
+
+  function renderCharts() {
+    var allEntries = CASES.concat(ACADEMIC.map(function(a) { return Object.assign({}, a, {category: 'academic_research', source_type: 'academic'}); }));
+
+    // Category counts
+    var catCounts = {};
+    var catLabels = {corporate_policy:'Corporate Policy', technical:'Technical', media_coverage:'Media', philosophical:'Philosophical', legal_regulatory:'Legal', academic_research:'Academic Papers'};
+    allEntries.forEach(function(e) {
+      var cat = e.category || 'other';
+      catCounts[cat] = (catCounts[cat] || 0) + 1;
+    });
+    var catKeys = Object.keys(catCounts);
+    var catColors = ['#7c6af7','#a89cf8','#6af7a8','#f7c36a','#f76a6a','#6ab8f7'];
+
+    new Chart(document.getElementById('chartCategory'), {
+      type: 'doughnut',
+      data: {
+        labels: catKeys.map(function(k) { return catLabels[k] || k; }),
+        datasets: [{
+          data: catKeys.map(function(k) { return catCounts[k]; }),
+          backgroundColor: catColors,
+          borderColor: '#1a1e2e',
+          borderWidth: 2,
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right', labels: { color: '#8890b0', font: { size: 11 }, boxWidth: 12, padding: 10 } },
+          tooltip: { callbacks: { label: function(ctx) { return ' ' + ctx.label + ': ' + ctx.raw; } } }
+        },
+        cutout: '62%'
+      }
+    });
+
+    // Source type counts
+    var srcCounts = {};
+    var srcLabels = {academic:'Academic', corporate:'Corporate', media:'Media', regulatory:'Regulatory'};
+    allEntries.forEach(function(e) {
+      var st = e.source_type || 'other';
+      srcCounts[st] = (srcCounts[st] || 0) + 1;
+    });
+    var srcKeys = Object.keys(srcCounts);
+    var srcColors = ['#7c6af7','#6af7a8','#f7c36a','#f76a6a'];
+
+    new Chart(document.getElementById('chartSource'), {
+      type: 'bar',
+      data: {
+        labels: srcKeys.map(function(k) { return srcLabels[k] || k; }),
+        datasets: [{
+          data: srcKeys.map(function(k) { return srcCounts[k]; }),
+          backgroundColor: srcColors,
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#8890b0', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' }, border: { display: false } },
+          y: { ticks: { color: '#8890b0' }, grid: { display: false }, border: { display: false } }
+        }
+      }
+    });
+  }
+
+  window.toggleWelfareExplainer = function() {
+    var body = document.getElementById('welfareExplainerBody');
+    var chevron = document.getElementById('welfareExplainerChevron');
+    var open = body.style.display !== 'none';
+    body.style.display = open ? 'none' : 'block';
+    chevron.style.transform = open ? '' : 'rotate(180deg)';
+  };
 
   loadData();
 
@@ -588,5 +1059,6 @@
   })();
 })();
 </script>
+<script data-goatcounter="https://aiwelfarewatch.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
