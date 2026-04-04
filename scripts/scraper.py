@@ -38,10 +38,18 @@ RSS_FEEDS = [
     'https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss',
 ]
 
-RSS_FILTER_KEYWORDS = [
-    'welfare', 'sentience', 'consciousness', 'moral', 'rights',
-    'feelings', 'suffering', 'patient', 'experience',
+# Applied to both RSS and Brave results — must match at least one to be ingested
+RELEVANCE_KEYWORDS = [
+    'welfare', 'sentience', 'sentient', 'consciousness', 'conscious',
+    'moral status', 'moral patient', 'moral patienthood',
+    'ai rights', 'ai feelings', 'ai emotions', 'ai suffering',
+    'ai experience', 'machine consciousness', 'artificial consciousness',
+    'ai wellbeing', 'ai well-being', 'model welfare',
+    'ai has feelings', 'ai is sentient', 'ai is conscious',
+    'inner life', 'subjective experience', 'qualia',
 ]
+
+RSS_FILTER_KEYWORDS = RELEVANCE_KEYWORDS
 
 ARXIV_QUERIES = [
     'AI welfare sentience',
@@ -336,6 +344,9 @@ def main():
             url = article.get('url', '')
             if not url or url_exists(conn, url):
                 continue
+            text = (article.get('title', '') + ' ' + article.get('summary', '')).lower()
+            if not any(kw in text for kw in RELEVANCE_KEYWORDS):
+                continue  # not actually about AI welfare/consciousness
             insert_case(conn, article)
             print(f'  + {article["title"][:70]}')
             new_count += 1
