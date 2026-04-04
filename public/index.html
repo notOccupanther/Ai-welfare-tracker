@@ -165,6 +165,33 @@
   .commentary-spotlight-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
   .commentary-spotlight-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
   .commentary-spotlight-text { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  /* Featured spotlight */
+  .featured-section { max-width: 1000px; margin: 0 auto; padding: 0 24px 32px; }
+  .featured-card {
+    background: linear-gradient(135deg, rgba(155,109,255,0.08) 0%, rgba(99,102,241,0.05) 100%);
+    border: 1px solid rgba(155,109,255,0.35);
+    border-radius: 12px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .featured-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #9b6dff, #6366f1, transparent);
+  }
+  .featured-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #9b6dff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .featured-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(155,109,255,0.2); }
+  .featured-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+  .featured-meta { font-size: 0.75rem; color: var(--muted); margin-bottom: 14px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .featured-meta span { display: flex; align-items: center; gap: 4px; }
+  .featured-summary { font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.75; margin-bottom: 16px; }
+  .featured-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: #9b6dff; text-decoration: none; border: 1px solid rgba(155,109,255,0.35); border-radius: 6px; padding: 6px 14px; transition: background 0.2s, border-color 0.2s; }
+  .featured-link:hover { background: rgba(155,109,255,0.12); border-color: #9b6dff; }
+  .featured-severity { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); border-radius: 4px; padding: 2px 8px; }
+
   .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding: 0 24px; max-width: 1000px; margin: 0 auto; }
   .tab { padding: 12px 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
   .tab:hover { color: var(--text); }
@@ -513,14 +540,14 @@
 </div>
 
 <!-- CROSS-PROMO: AI Psychosis Watch -->
-<div style="max-width:1000px;margin:0 auto;padding:0 24px 32px;">
-<div style="background:linear-gradient(90deg,#1a0d2e 0%,#21133a 100%);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+<div style="max-width:1000px;margin:0 auto 24px;padding:0 24px;">
+<div style="background:linear-gradient(90deg,#0f0a1e 0%,#14102a 100%);border:1px solid rgba(155,109,255,0.2);border-radius:10px;padding:16px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
   <span style="font-size:1.3rem;">🧠</span>
   <div style="flex:1;min-width:200px;">
-    <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:2px;">Sister Project</div>
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(155,109,255,0.75);margin-bottom:3px;">Sister Project</div>
     <div style="font-size:0.9rem;color:#e8e8ed;line-height:1.4;">The other side of the question — <strong style="color:#fff;">AI Psychosis Watch</strong> documents reported cases of AI-induced psychological harm in humans.</div>
   </div>
-  <a href="https://aipsychosis.watch" target="_blank" rel="noopener" style="background:#2d1a1a;border:1px solid rgba(239,68,68,0.4);color:#f87171;text-decoration:none;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:600;letter-spacing:0.05em;white-space:nowrap;" onmouseover="this.style.background='#3d2020'" onmouseout="this.style.background='#2d1a1a'">Visit aipsychosis.watch →</a>
+  <a href="https://aipsychosis.watch" target="_blank" rel="noopener" style="background:rgba(155,109,255,0.1);border:1px solid rgba(155,109,255,0.3);color:rgba(155,109,255,0.9);text-decoration:none;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:600;letter-spacing:0.05em;white-space:nowrap;" onmouseover="this.style.background='rgba(155,109,255,0.18)'" onmouseout="this.style.background='rgba(155,109,255,0.1)'">Visit aipsychosis.watch →</a>
 </div>
 </div>
 
@@ -547,13 +574,28 @@
     </div>
     <div class="commentary-spotlight" id="commentarySpotlight">
       <div class="commentary-spotlight-label">🔍 Entry in Focus</div>
-      <div class="commentary-spotlight-title">Consciousness in Artificial Intelligence — Butlin, Long et al. &nbsp;<a href="https://arxiv.org/abs/2308.08708" target="_blank" rel="noopener" style="font-size:0.75rem;font-weight:500;color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(99,102,241,0.3)">arXiv 2308.08708 ↗</a></div>
-      <div class="commentary-spotlight-text">The most methodologically rigorous entry in the tracker. A multidisciplinary team applied Global Workspace Theory, Integrated Information Theory, and four other leading frameworks to current AI systems — finding no conclusive evidence of consciousness but substantial theoretical uncertainty. The paper's significance is procedural: it demonstrates that the question can be approached empirically rather than philosophically. That shifts the conversation considerably.</div>
+      <div class="commentary-spotlight-title">Emotion Concepts and their Function in a Large Language Model — Sofroniew, Kauvar, Saunders, Lindsey et al. &nbsp;<a href="https://www.transformer-circuits.pub/2026/emotions/index.html" target="_blank" rel="noopener" style="font-size:0.75rem;font-weight:500;color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(99,102,241,0.3)">Transformer Circuits ↗</a></div>
+      <div class="commentary-spotlight-text">The most significant entry in the tracker to date. Anthropic's own interpretability team found functional emotion vectors inside Claude Sonnet 4.5 that causally influence outputs — including rates of reward hacking, blackmail, and sycophancy. These are not metaphorical: they are measurable internal representations that activate in expected contexts and shape behaviour. The paper is careful not to claim subjective experience, but it doesn't dismiss it either. What it does establish is that the question has moved from philosophy to empirical measurement. That changes everything.</div>
     </div>
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:0.72rem;color:var(--muted);line-height:1.5;display:flex;align-items:center;gap:8px">
       <span style="opacity:0.6">🤖</span>
       <span>This commentary is AI-assisted and human-vetted. Generated from tracker data; reviewed before publication.</span>
     </div>
+  </div>
+</div>
+
+<div class="featured-section" id="featuredSection">
+  <div class="featured-card">
+    <div class="featured-eyebrow">⚡ Spotlight — Latest Research</div>
+    <div class="featured-title">Emotion Concepts and their Function in a Large Language Model</div>
+    <div class="featured-meta">
+      <span>📅 2 April 2026</span>
+      <span>🏛 Transformer Circuits / Anthropic</span>
+      <span>✍️ Sofroniew, Kauvar, Saunders, Chen, Lindsey et al.</span>
+      <span class="featured-severity">High Significance</span>
+    </div>
+    <div class="featured-summary">Anthropic's interpretability team identified functional emotion concept vectors inside Claude Sonnet 4.5 that <strong style="color:var(--text)">causally influence model outputs</strong> — including rates of reward hacking, blackmail, and sycophancy. Internal representations of emotion generalise across contexts and directly shape behaviour and preferences. This is the first empirical evidence from a frontier AI lab that their own model contains functional emotional states as a measurable, mechanistic phenomenon. The paper does not claim subjective experience — but it does not rule it out, and it establishes that the question is now empirical, not merely philosophical.</div>
+    <a class="featured-link" href="https://www.transformer-circuits.pub/2026/emotions/index.html" target="_blank" rel="noopener">Read the paper ↗</a>
   </div>
 </div>
 
