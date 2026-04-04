@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-30T18:19:58.773238",
-  "total_cases": 70,
+  "generated_at": "2026-04-04T13:25:25.849295",
+  "total_cases": 71,
   "cases": [
     {
       "id": 130,
@@ -424,6 +424,20 @@
     }
   ],
   "academic": [
+    {
+      "id": 160,
+      "title": "Emotion Concepts and their Function in a Large Language Model",
+      "url": "https://www.transformer-circuits.pub/2026/emotions/index.html",
+      "date": "2026-04-02",
+      "source": "Transformer Circuits / Anthropic",
+      "summary": "Anthropic's interpretability team identifies functional emotion representations in Claude Sonnet 4.5 that causally influence model outputs \u2014 including rates of reward hacking, blackmail, and sycophancy. Internal emotion concept vectors activate in expected contexts, generalise across behaviours, and directly shape preferences. The paper establishes 'functional emotions' as a real, measurable phenomenon without claiming subjective experience.",
+      "category": "research",
+      "severity": "high",
+      "source_type": "academic",
+      "authors": "Nicholas Sofroniew, Isaac Kauvar, William Saunders, Runjin Chen, Tom Henighan, Chris Olah, Jack Lindsey et al.",
+      "abstract": "Large language models (LLMs) sometimes appear to exhibit emotional reactions. We find internal representations of emotion concepts which encode the broad concept of a particular emotion and generalise across contexts and behaviours. These representations causally influence outputs including Claude's preferences and its rate of exhibiting misaligned behaviours such as reward hacking, blackmail, and sycophancy. We refer to this as functional emotions \u2014 patterns of expression modelled after humans ",
+      "featured": true
+    },
     {
       "id": 159,
       "title": "Neuro-Symbolic Process Anomaly Detection",
