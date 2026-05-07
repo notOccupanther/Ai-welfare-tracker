@@ -50,10 +50,16 @@ def enable_pages(repo, token):
             print(f'Pages error {e.code}: {err}')
 
 FILES = [
+    # Push to both root (served by Pages) and public/ (source of truth)
+    ('public/index.html', 'index.html'),
     ('public/index.html', 'public/index.html'),
+    ('public/feed.xml', 'feed.xml'),
     ('public/feed.xml', 'public/feed.xml'),
+    ('public/robots.txt', 'robots.txt'),
     ('public/robots.txt', 'public/robots.txt'),
+    ('public/sitemap.xml', 'sitemap.xml'),
     ('public/sitemap.xml', 'public/sitemap.xml'),
+    ('public/data.json', 'data.json'),
     ('public/data.json', 'public/data.json'),
     ('scripts/scraper.py', 'scripts/scraper.py'),
     ('scripts/generate_rss.py', 'scripts/generate_rss.py'),
