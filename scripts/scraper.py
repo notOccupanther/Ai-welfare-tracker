@@ -378,6 +378,10 @@ def main():
                 url = paper.get('url', '')
                 if not url or url_exists(conn, url):
                     continue
+                # Apply same relevance filter as RSS — reject papers not about welfare/sentience
+                if not rss_entry_matches(paper.get('title', ''), paper.get('summary', '')):
+                    print(f'  [skip] not welfare-relevant: {paper["title"][:60]}')
+                    continue
                 insert_case(conn, paper)
                 print(f'  + {paper["title"][:70]}')
                 new_count += 1
