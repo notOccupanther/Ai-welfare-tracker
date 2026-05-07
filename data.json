@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-07T11:51:27.149951",
-  "total_cases": 137,
+  "generated_at": "2026-05-07T11:52:11.181631",
+  "total_cases": 136,
   "cases": [
     {
       "id": 307,
@@ -519,17 +519,6 @@
       "summary": "It is thanks to Anthropic that we get to have this discussion in the first place. Only they, among the labs, take the problem seriously enough to attempt to address these problems at all. They are also the ones that make the models that matter most. So the people who care about model welfare get ...",
       "category": "corporate_policy",
       "severity": "medium",
-      "source_type": "media"
-    },
-    {
-      "id": 263,
-      "title": "EU AI Act Shock: Emotion Recognition Is Now Illegal at Work. So Why Is Your Vendor Still Selling It? - UC Today",
-      "url": "https://www.uctoday.com/workplace-management/eu-ai-act-shock-emotion-recognition-is-now-illegal-at-work-so-why-is-your-vendor-still-selling-it/",
-      "date": "",
-      "source": "www.uctoday.com",
-      "summary": "The truth is, emotion AI at work is no longer a product category in Europe. It\u2019s a violation of fundamental rights. That\u2019s not my opinion. That\u2019s the law. For the best part of a decade, one pitch has run through the enterprise AI market. It went something like this. Managers could finally see the unseeable. The inner life of the workforce could be measured. A well-designed algorithm could tell a team leader how their people were really feeling...",
-      "category": "legal_regulatory",
-      "severity": "high",
       "source_type": "media"
     },
     {
