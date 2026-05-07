@@ -82,8 +82,8 @@ def url_exists(conn, url):
 def insert_case(conn, case):
     scraped_at = datetime.now().isoformat()
     conn.execute('''
-        INSERT INTO cases (title, url, date, source, summary, category, severity, scraped_at, source_type, authors, doi, venue, abstract)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO cases (title, url, date, source, summary, category, severity, scraped_at, source_type, authors, doi, venue, abstract, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')
     ''', (
         case.get('title', '')[:500],
         case.get('url', ''),
