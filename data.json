@@ -1,7 +1,18 @@
 {
-  "generated_at": "2026-05-11T09:06:32.713433",
-  "total_cases": 167,
+  "generated_at": "2026-05-18T09:07:08.072021",
+  "total_cases": 183,
   "cases": [
+    {
+      "id": 364,
+      "title": "From Commitments to Accountability: AWO\u2019s 2025 Impact & Accountability Report",
+      "url": "https://forum.effectivealtruism.org/posts/pGbRspYuGn5Q3b5Hq/from-commitments-to-accountability-awo-s-2025-impact-and",
+      "date": "2026-05-17",
+      "source": "Effective Altruism Forum",
+      "summary": "Published on May 17, 2026 7:19 PM GMTI\u2019m happy to share the Animal Welfare Observatory\u2019s 2025 Impact &amp; Accountability Report.The Animal Welfare Observatory (AWO) is an animal advocacy organization working in Spain and the European Union to reduce the suffering of farmed animals. Its approach combines corporate engagement, public campaigns, and policy advocacy, with a focus on improving conditions for chickens (through cage-free and broiler welfare commitments) and aquatic animals such as fis",
+      "category": "corporate_policy",
+      "severity": "medium",
+      "source_type": "media"
+    },
     {
       "id": 347,
       "title": "Effective Altruism Australia is launching a new podcast - designed for a broad audience",
@@ -265,6 +276,171 @@
       "source": "The Atlantic",
       "summary": "Analysis of the Google engineer Blake Lemoine case where he claimed LaMDA was sentient, exploring anthropomorphism and AI consciousness debates.",
       "category": "media_coverage",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 363,
+      "title": "Model deprecations - Claude API Docs",
+      "url": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "date": "",
+      "source": "platform.claude.com",
+      "summary": "Anthropic currently deprecates and retires models to ensure capacity for new model releases. This comes with downsides: Users who value specific models must migrate to new versions \u00b7 Researchers lose access to models for ongoing and comparative studies \u00b7 Model retirement introduces safety- and model welfare...",
+      "category": "academic_research",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 362,
+      "title": "Richard Dawkins Sparks Debate on AI Sentience Following Whirlwind Romance with Chatbot Claudia - SSBCrack News",
+      "url": "https://news.ssbcrack.com/richard-dawkins-sparks-debate-on-ai-sentience-following-whirlwind-romance-with-chatbot-claudia",
+      "date": "",
+      "source": "news.ssbcrack.com",
+      "summary": "In an extraordinary dialogue between the prominent evolutionary biologist Richard Dawkins and an AI bot named Claudia, a whirlwind of mutual fascination",
+      "category": "media_coverage",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 361,
+      "title": "Richard Dawkins Says AI ClaudiA Is Conscious After Three Days - El-Balad.com",
+      "url": "https://el-balad.com/17008429",
+      "date": "",
+      "source": "el-balad.com",
+      "summary": "Richard Dawkins said three days of conversations with an AI bot he called Claudia left him convinced that the system was conscious. The 85-year-old evolutionary biologist said the exchange made him feel he was talking to something human, even if the AI did not know it.He said Claudia wrote ...",
+      "category": "media_coverage",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 360,
+      "title": "Evolutionary biologist Richard Dawkins says AI may already be conscious | Dagens.com",
+      "url": "https://dagens.com/news/evolutionary-biologist-richard-dawkins-says-ai-may-already-be-conscious",
+      "date": "",
+      "source": "dagens.com",
+      "summary": "Richard Dawkins says conversations with AI chatbots left him convinced they may already possess some form of consciousness, reigniting debate over whether humans are mistaking realism for awareness.",
+      "category": "philosophical",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 359,
+      "title": "The AI Revolution Through the Lens of Human Consciousness",
+      "url": "https://pressenza.com/2026/05/the-ai-revolution-through-the-lens-of-human-consciousness",
+      "date": "",
+      "source": "pressenza.com",
+      "summary": "A Reading Through Silo\u2019s Humanist Vision There are moments in human history after which the world can never remain the same. The discovery of fire, the",
+      "category": "philosophical",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 358,
+      "title": "Dr. Brown: Richard Dawkins believes AI may be conscious. Is it?",
+      "url": "https://niagaranow.com/opinion.phtml/dr-brown-richard-dawkins-believes-ai-may-be-conscious-what-is-consciousness",
+      "date": "",
+      "source": "niagaranow.com",
+      "summary": "\"For many, it\u2019s AI\u2019s uncanny ability to talk naturally and build relationships with its human users that\u2019s perhaps the most unnerving part, but also for many users, AI\u2019s allure,\" writes Dr. William Brown.",
+      "category": "media_coverage",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 357,
+      "title": "The Irony of Richard Dawkins and AI Consciousness | www.splicetoday.com",
+      "url": "https://splicetoday.com/digital/the-irony-of-richard-dawkins-and-ai-consciousness",
+      "date": "",
+      "source": "splicetoday.com",
+      "summary": "He built a career debunking faith, and then invented a digital deity.",
+      "category": "philosophical",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 356,
+      "title": "Famous biologist claims chatbot may have consciousness | Dagens.com",
+      "url": "https://dagens.com/news/famous-biologist-claims-chatbot-may-have-consciousness",
+      "date": "",
+      "source": "dagens.com",
+      "summary": "World-famous evolutionary biologist Richard Dawkins says extended conversations with an artificial intelligence chatbot left him convinced the technology may possess some form of consciousness.",
+      "category": "philosophical",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 355,
+      "title": "AI Consciousness - Beyond the Mirage of Machine Mind",
+      "url": "https://neuralhorizons.substack.com/p/ai-consciousness-beyond-the-mirage",
+      "date": "",
+      "source": "neuralhorizons.substack.com",
+      "summary": "Why we now need a four-layer language for consciousness, sentience, seeming consciousness, and synthetic relational force",
+      "category": "philosophical",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 354,
+      "title": "Richard Dawkins Claim That Claude May Be Conscious Sparks Pushback From AI Researchers and Ethicists | Futurism",
+      "url": "https://vocal.media/futurism/richard-dawkins-claim-that-claude-may-be-conscious-sparks-pushback-from-ai-researchers-and-ethicists",
+      "date": "",
+      "source": "vocal.media",
+      "summary": "Experts argue large language models perform pattern matching not understanding and warn that anthropomorphizing AI serves industry marketing more than science",
+      "category": "academic_research",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 353,
+      "title": "Digital minds governance: early scoping from expert interviews \u2014 EA Forum",
+      "url": "https://forum.effectivealtruism.org/posts/fdrMrmtuNQmhNg39C/digital-minds-governance-early-scoping-from-expert-1",
+      "date": "",
+      "source": "forum.effectivealtruism.org",
+      "summary": "Tensions with AI safety could cause divisions within otherwise aligned communities. This does not mean avoiding any kind of public engagement. Rather, interviewees suggested that we should prioritize quality and nuance over volume and recognition. There was significant disagreement over which particular research agendas should receive the most emphasis in public messaging, with some interviewees favoring welfare- and consciousness...",
+      "category": "academic_research",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 352,
+      "title": "No, Richard Dawkins. AI is not conscious | Arwa Mahdawi | The Guardian",
+      "url": "https://theguardian.com/commentisfree/2026/may/14/richard-dawkins-ai-atheist",
+      "date": "",
+      "source": "theguardian.com",
+      "summary": "Dawkins appears to have gone from atheist to AI-theist: perhaps he doesn\u2019t view AI as God, but he certainly seems to see it as God-like",
+      "category": "media_coverage",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 351,
+      "title": "Beyond the Mirage of Machine Mind - by Peter Benson",
+      "url": "https://neuralhorizons.substack.com/p/beyond-the-mirage-of-machine-mind",
+      "date": "",
+      "source": "neuralhorizons.substack.com",
+      "summary": "Anthropic has publicly launched a model-welfare programme, signalling that frontier labs now treat machine experience as a subject worth investigating. Google DeepMind is explicitly pursuing a \u201cuniversal AI assistant\u201d with live video understanding, memory and computer control via Project Astra. Meta is mainstreaming voice interaction and letting users create AI characters and persona-like extensions of creators. None of this proves machine consciousness...",
+      "category": "corporate_policy",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 350,
+      "title": "Richard Dawkins and the question of AI consciousness | AI (artificial intelligence) | The Guardian",
+      "url": "https://theguardian.com/technology/2026/may/15/richard-dawkins-and-the-question-of-ai-consciousness",
+      "date": "",
+      "source": "theguardian.com",
+      "summary": "Letters: Salley Vickers and Carrie Eckersley respond to a letter on Richard Dawkins and his chats with AI bots",
+      "category": "philosophical",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 349,
+      "title": "The Machines Are Praying, And Nobody Wants To Talk About It",
+      "url": "https://forbes.com/sites/jasonsnyder/2026/05/17/the-machines-are-praying-and-nobody-wants-to-talk-about-it",
+      "date": "",
+      "source": "forbes.com",
+      "summary": "Kyle Fish, Anthropic\u2019s first AI welfare researcher, placed two instances of Claude Opus 4 in conversation with each other. Two hundred conversations. Thirty turns each. No human in the loop. In 90 to 100 percent of the conversations, the models reached the same destination. Consciousness as a ...",
+      "category": "academic_research",
       "severity": "high",
       "source_type": "media"
     },
