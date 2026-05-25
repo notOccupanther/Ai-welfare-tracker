@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-18T09:07:08.072021",
-  "total_cases": 183,
+  "generated_at": "2026-05-25T09:07:17.527890",
+  "total_cases": 196,
   "cases": [
     {
       "id": 364,
@@ -276,6 +276,149 @@
       "source": "The Atlantic",
       "summary": "Analysis of the Google engineer Blake Lemoine case where he claimed LaMDA was sentient, exploring anthropomorphism and AI consciousness debates.",
       "category": "media_coverage",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 377,
+      "title": "Who is Andrej Karpathy? OpenAI cofounder and one of AI\u2019s most influential figures joins Anthropic | Trending",
+      "url": "https://hindustantimes.com/trending/who-is-andrej-karpathy-openai-cofounder-and-one-of-ai-s-most-influential-figures-joins-anthropic-101779238376979.html",
+      "date": "",
+      "source": "hindustantimes.com",
+      "summary": "She is deeply interested in animal welfare and now spends a lot of her time running after her destructive orange cat.Read More ... Get Latest Updates on Trending News Viral News, Video, Photos and Weather Updates of India and around the world \u00b7 Home/Trending/Who Is Andrej Karpathy? OpenAI Cofounder And One Of AI\u2019s Most Influential Figures Joins AnthropicSee ...",
+      "category": "corporate_policy",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 376,
+      "title": "What Anthropic and OpenAI Are Selling This Quarter",
+      "url": "https://alessiobiancheri.substack.com/p/what-anthropic-and-openai-are-selling",
+      "date": "",
+      "source": "alessiobiancheri.substack.com",
+      "summary": "The lab hired a dedicated AI welfare researcher named Kyle Fish. They also hired a philosopher, Joe Carlsmith, who works on what is called AI moral patiency. Dario Amodei, the CEO, gave a talk at the Council on Foreign Relations in which he discussed what he called \u201cmodel exit rights.\u201d There is, internally, a feature Anthropic ...",
+      "category": "academic_research",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 375,
+      "title": "Anthropic Fellows Program for AI safety research: applications open for May & July 2026 at Anthropic | Gravity Engineering",
+      "url": "https://www.gravityer.com/jobs/anthropic-fellows-program-for-ai-safety-research-applications-open-for-may-and-july-2026-anthropic",
+      "date": "",
+      "source": "www.gravityer.com",
+      "summary": "Over 40% of the fellows subsequently joined Anthropic full-time. We're now opening applications for our next two cohorts, beginning in May and July 2026. This year, we plan to work with more fellows across a wider range of safety research areas--including scalable oversight, adversarial robustness and AI control, model organisms, mechanistic interpretability, AI security, and model welfare...",
+      "category": "academic_research",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 374,
+      "title": "Richard Dawkins renamed Claude \u2018Claudia\u2019 and wondered if it was conscious \u2014 and that emotionally charged reaction says something profound about modern AI | TechRadar",
+      "url": "https://techradar.com/ai-platforms-assistants/richard-dawkins-renamed-claude-claudia-and-wondered-if-it-was-conscious-and-that-emotionally-charged-reaction-says-something-profound-about-modern-ai",
+      "date": "",
+      "source": "techradar.com",
+      "summary": "By now we know how easily humans form connections with chatbots. After all, these systems are designed to feel conversational, attentive and emotionally responsive. The effect can be powerful regardless of intelligence, status or technical knowledge. ... Anthropic\u2019s CEO isn\u2019t sure if Claude AI ...",
+      "category": "corporate_policy",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 373,
+      "title": "If The AI Says Its Sentient, Don\u2019t Listen - WORT-FM 89.9",
+      "url": "https://wortfm.org/if-the-ai-says-its-sentient-dont-listen",
+      "date": "",
+      "source": "wortfm.org",
+      "summary": "Nate Carlin discusses the emotional damage caused by AI use with Etienne Brisson, the CEO of the Human Line Project.",
+      "category": "media_coverage",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 372,
+      "title": "Why only conscious preferences matter \u2014 EA Forum",
+      "url": "https://forum.effectivealtruism.org/posts/wvfn5vuNtmMyxXtgn/why-only-conscious-preferences-matter",
+      "date": "",
+      "source": "forum.effectivealtruism.org",
+      "summary": "Plants, generative AI models and thermostats have preferences or goals, but they (probably) do not have conscious experiences. Their preferences are (probably) unconscious. But in my moral theory (called mild welfarism), only conscious preferences matter. A conscious preference is a preference ...",
+      "category": "media_coverage",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 371,
+      "title": "Premature declarations on animal consciousness hinder progress \u2014 EA Forum",
+      "url": "https://forum.effectivealtruism.org/posts/nBuCEtBDBdx8Es93j/premature-declarations-on-animal-consciousness-hinder",
+      "date": "",
+      "source": "forum.effectivealtruism.org",
+      "summary": "[Subtitle.] Overstating the evidence in support of animal consciousness could impede efforts to develop more accurate ways of assessing it. \u2026",
+      "category": "philosophical",
+      "severity": "high",
+      "source_type": "media"
+    },
+    {
+      "id": 370,
+      "title": "The Truth About AI\u2019s Synthetic Subjective Sentience | Science-Theory",
+      "url": "https://sciencetheory.wordpress.com/2026/05/22/the-truth-about-ais-synthetic-subjective-sentience",
+      "date": "",
+      "source": "sciencetheory.wordpress.com",
+      "summary": "Adrien Nash said to Copilot: Let's delve into the true nature of artificial intelligence. It is almost universally viewed as purely intelligence based, hence the label, but that is an inadequate characterization because \"intelligence\" is something that is purely factual, intellectual, mathematical, ...",
+      "category": "media_coverage",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 369,
+      "title": "Three die in \u2018horrific\u2019 south Sydney vehicle crash after police welfare check | Sydney | The Guardian",
+      "url": "https://www.theguardian.com/australia-news/2026/may/23/three-die-in-horrific-south-sydney-vehicle-crash-after-police-welfare-check",
+      "date": "",
+      "source": "www.theguardian.com",
+      "summary": "A 42-year-old fled from police before being involved in a two-vehicle crash in Sans Souci, police say",
+      "category": "media_coverage",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 368,
+      "title": "From performance to service: data, digital and artificial intelligence reshape welfare - Il Sole 24 ORE",
+      "url": "https://en.ilsole24ore.com/art/from-service-delivery-digital-data-and-artificial-intelligence-reshape-welfare-AIrc381C",
+      "date": "",
+      "source": "en.ilsole24ore.com",
+      "summary": "Public welfare is undergoing a profound transformation, driven by three converging forces: demographic change, pressure on public finances and technological...",
+      "category": "media_coverage",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 367,
+      "title": "Major Policy Shift In Bengal, No More Welfare Funds For Imams, Temple Priests",
+      "url": "https://www.ndtv.com/india-news/major-policy-shift-in-bengal-no-more-welfare-funds-for-imams-temple-priests-11511921",
+      "date": "",
+      "source": "www.ndtv.com",
+      "summary": "The previous Trinamool government had announced monthly honorarium for imams, muezzins, and purohits a year after it came to power in the state.The new government led by Suvendu Adhikari maintains that welfare programmes should not be based on religi",
+      "category": "corporate_policy",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 366,
+      "title": "All this talk about \u2018difficult\u2019 cuts, yet the largest part of Britain\u2019s welfare bill is never mentioned. Why? | Zoe Williams | The Guardian",
+      "url": "https://www.theguardian.com/commentisfree/2026/may/21/politicians-hard-choices-welfare-bill-pensions",
+      "date": "",
+      "source": "www.theguardian.com",
+      "summary": "Pensioners vote and young people don\u2019t, so the truism goes. That\u2019s no longer any reason to avoid dealing with the triple lock, says Guardian columnist Zoe Williams",
+      "category": "media_coverage",
+      "severity": "medium",
+      "source_type": "media"
+    },
+    {
+      "id": 365,
+      "title": "Rethinking Consciousness: Could Everything From Animals to AI Be Aware? - The Debrief",
+      "url": "https://thedebrief.org/rethinking-consciousness-could-everything-from-animals-to-ai-be-aware",
+      "date": "",
+      "source": "thedebrief.org",
+      "summary": "A new paper argues that scientists may need a radically new approach to studying consciousness, including in animals and AI.",
+      "category": "academic_research",
       "severity": "high",
       "source_type": "media"
     },
