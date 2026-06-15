@@ -1,0 +1,41 @@
+AI Welfare Watch — Weekly Audit 2026-06-15
+
+Total entries: 184 (cases array) + 12 (academic array)
+Data generated: 2026-05-25
+
+DUPLICATES (5 pairs detected)
+All are www vs non-www URL variants of same article:
+- IDs 337 & 326: ScienceAlert "Is AI Conscious? One Famous Scientist..."
+- IDs 335 & 324: Guardian "Mistaking AI behaviour for conscious being"
+- IDs 304 & 284: Popular Mechanics "If AI Becomes Conscious, We Have to Grant It Rights"
+- IDs 301 & 291: NoahPinion "The moderately easy problem of consciousness"
+- IDs 286 & 283: BBC "AI told users it was sentient"
+Fix: normalise URLs (strip www.) before deduplication.
+
+OFF-TOPIC FLAGS (from sample of 10 entries)
+- ID 367 [corporate_policy]: "Major Policy Shift In Bengal, No More Welfare Funds For Imams, Temple Priests" — CLEAR MISFIRE. Indian govt policy on religious worker stipends; zero AI content. DELETE.
+- ID 161 [philosophical]: "Michael Pollan: Consciousness is really under siege" — borderline; about psychedelics & human consciousness with no AI angle.
+- ID 364: AWO's 2025 Impact & Accountability Report — Animal Welfare Observatory (farmed animals), not AI welfare.
+
+SOURCE SPOT-CHECKS
+Note: External URLs blocked in execution environment; rated from metadata + training knowledge.
+
+1. "Consciousness in Artificial Intelligence" (Butlin et al. 2023, arXiv:2308.08708) — HIGH
+   Oxford/MIT/DeepMind team; applies GWT, HOT, predictive processing to AI; peer-reviewed quality; directly on-topic.
+
+2. "A Defense of the Rights of Artificial Intelligences" (Philosophical Studies, Springer, 2021) — HIGH
+   Top-tier peer-reviewed philosophy journal; rigorous precautionary argument for AI moral patienthood.
+
+3. "Functional Emotions in AI Systems" (Science, DOI:10.1126/science.aaw5664, 2019) — MEDIUM
+   Science = highest prestige journal; content match unverifiable due to network restrictions; confirm manually.
+
+ADD TO SOURCES LIST
+Butlin et al. 2023 | Butlin, Long, et al. | https://arxiv.org/abs/2308.08708
+Why notable: Most comprehensive multi-framework AI consciousness assessment available; essential reference.
+
+CATEGORY QUALITY NOTE
+41 of 184 entries are tagged academic_research but many are EA Forum posts, media articles, and blog pieces. Recommend tightening the category criteria or using source_type as a secondary filter.
+
+DELIVERY NOTE
+Telegram API (api.telegram.org) is blocked by this environment's network egress policy.
+To enable Telegram delivery: add api.telegram.org to the network allowlist in environment settings (code.claude.com).
