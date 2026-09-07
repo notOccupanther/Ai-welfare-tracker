@@ -1,0 +1,23 @@
+name: Daily Bluesky Draft
+
+on:
+  schedule:
+    - cron: "0 8 * * *"   # 08:00 UTC daily
+  workflow_dispatch:        # allow manual runs from the Actions tab
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate and send draft
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/post_draft.py
